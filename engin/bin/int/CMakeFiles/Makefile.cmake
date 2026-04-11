@@ -40,6 +40,10 @@ set(CMAKE_MAKEFILE_DEPENDS
   "E:/software/cmake/share/cmake-4.2/Modules/CMakeTestCXXCompiler.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/CMakeTestCompilerCommon.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/CMakeTestRCCompiler.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/CheckCSourceCompiles.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/CheckIncludeFile.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/CheckLibraryExists.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/CheckSymbolExists.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/ADSP-DetermineCompiler.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/ARMClang-DetermineCompiler.cmake"
@@ -100,17 +104,21 @@ set(CMAKE_MAKEFILE_DEPENDS
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/zOS-C-DetermineCompiler.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/FindPackageHandleStandardArgs.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/FindPackageMessage.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/FindThreads.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/GNUInstallDirs.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeCLinkerInformation.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeCommonLinkerInformation.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeDetermineLinkerId.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeInspectCLinker.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/CMakeInspectCXXLinker.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/Internal/CheckSourceCompiles.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Internal/FeatureTesting.cmake"
-  "E:/software/cmake/share/cmake-4.2/Modules/Linker/GNU-C.cmake"
-  "E:/software/cmake/share/cmake-4.2/Modules/Linker/GNU-CXX.cmake"
-  "E:/software/cmake/share/cmake-4.2/Modules/Linker/GNU.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/GNU.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/Windows-C.cmake"
+  "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/Windows-CXX.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/Windows-GNU-C.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/Windows-GNU-CXX.cmake"
   "E:/software/cmake/share/cmake-4.2/Modules/Platform/Linker/Windows-GNU.cmake"
@@ -129,6 +137,9 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/4.2.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.2.1/CMakeRCCompiler.cmake"
   "CMakeFiles/4.2.1/CMakeSystem.cmake"
+  "F:/yxy/GameEngine/engin/vendor/spdlog/CMakeLists.txt"
+  "F:/yxy/GameEngine/engin/vendor/spdlog/cmake/ide.cmake"
+  "F:/yxy/GameEngine/engin/vendor/spdlog/cmake/utils.cmake"
   )
 
 # The corresponding makefile is:
@@ -148,9 +159,11 @@ set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/4.2.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.2.1/CMakeCXXCompiler.cmake"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "vendor/spdlog/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/GameEngine.dir/DependInfo.cmake"
+  "vendor/spdlog/CMakeFiles/spdlog.dir/DependInfo.cmake"
   )

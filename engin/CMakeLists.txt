@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 # 项目名称
 project(GameEngine)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ====================== C++17 ======================
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,7 +18,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # ====================== 中间文件目录 ======================
 # 编译临时文件全部放 bin/int
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin/int)
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/../bin/int)
 
 
 
@@ -28,8 +29,17 @@ file(GLOB SRC_FILES
 )
 
 # ====================== 编译成 DLL（核心） ======================
+
+add_subdirectory(vendor/spdlog)
+
+
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_compile_definitions(${PROJECT_NAME} PRIVATE GAME_ENGINE_BUILD)
+
+target_link_libraries(${PROJECT_NAME}
+    PUBLIC
+    spdlog::spdlog
+)
 
 
