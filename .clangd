@@ -1,6 +1,8 @@
 # 全局生效，所有源文件
 CompileFlags:
+  CompilationDatabase: "engin/bin/int"
   Add:
     - -std=c++17
-    - -If:/yxy/GameEngine/engin/include # 项目自定义头文件
-
+    - -If:/yxy/GameEngine/engin/include 
+    - -If:/yxy/GameEngine/engin/vendor/spdlog/include
+   

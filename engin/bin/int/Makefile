@@ -128,6 +128,19 @@ GameEngine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameEngine.dir\build.make CMakeFiles/GameEngine.dir/build
 .PHONY : GameEngine/fast
 
+#=============================================================================
+# Target rules for targets named spdlog
+
+# Build rule for target.
+spdlog: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 spdlog
+.PHONY : spdlog
+
+# fast build rule for target.
+spdlog/fast:
+	$(MAKE) $(MAKESILENT) -f vendor\spdlog\CMakeFiles\spdlog.dir\build.make vendor/spdlog/CMakeFiles/spdlog.dir/build
+.PHONY : spdlog/fast
+
 src/Application.obj: src/Application.cpp.obj
 .PHONY : src/Application.obj
 
@@ -152,6 +165,30 @@ src/Application.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameEngine.dir\build.make CMakeFiles/GameEngine.dir/src/Application.cpp.s
 .PHONY : src/Application.cpp.s
 
+src/Log.obj: src/Log.cpp.obj
+.PHONY : src/Log.obj
+
+# target to build an object file
+src/Log.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameEngine.dir\build.make CMakeFiles/GameEngine.dir/src/Log.cpp.obj
+.PHONY : src/Log.cpp.obj
+
+src/Log.i: src/Log.cpp.i
+.PHONY : src/Log.i
+
+# target to preprocess a source file
+src/Log.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameEngine.dir\build.make CMakeFiles/GameEngine.dir/src/Log.cpp.i
+.PHONY : src/Log.cpp.i
+
+src/Log.s: src/Log.cpp.s
+.PHONY : src/Log.s
+
+# target to generate assembly for a file
+src/Log.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\GameEngine.dir\build.make CMakeFiles/GameEngine.dir/src/Log.cpp.s
+.PHONY : src/Log.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -161,9 +198,13 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... GameEngine
+	@echo ... spdlog
 	@echo ... src/Application.obj
 	@echo ... src/Application.i
 	@echo ... src/Application.s
+	@echo ... src/Log.obj
+	@echo ... src/Log.i
+	@echo ... src/Log.s
 .PHONY : help
 
 
