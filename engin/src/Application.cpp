@@ -1,8 +1,8 @@
-
 #include "Application.h"
 #include "Log.h"
-#include "spdlog/spdlog.h"
-#include <iostream>
+#include "pch.h"
+#include <Event/ApplicationEvent.h>
+
 namespace GE {
 
 Application::Application() {}
@@ -12,6 +12,8 @@ void Application::Run() {
   Log::Init();
   GE_CORE_INFO("Initialized log");
   GE_INFO("Hello");
+  WindowResizeEvent e(1000, 1000);
+  GE_TRACE(e);
   while (true) {
   }
 }
