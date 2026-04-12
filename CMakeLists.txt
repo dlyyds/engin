@@ -6,9 +6,8 @@ project(GameEngine)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+
+
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -25,20 +24,30 @@ set(ENGINE_NAME GameEngine)       # 引擎DLL名称
 set(APP_NAME Sandbox)  
 
 #GameEngine DLL
+
 add_subdirectory(engin/vendor/spdlog)
+add_subdirectory(engin/vendor/glfw)
 
 file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/*.cpp
-    ${CMAKE_SOURCE_DIR}/engin/include/**/*.h
-
+    ${CMAKE_SOURCE_DIR}/engin/src/platform/windows/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
+    ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
 )
 
 
 add_library(${ENGINE_NAME} SHARED ${ENGINE_SRC})
 target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/engin/include/GE)
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
-target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog)
+target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw)
+target_compile_features(${ENGINE_NAME} PUBLIC cxx_std_17)
 
+
+if(WIN32)
+    target_link_libraries(${ENGINE_NAME} PUBLIC
+        opengl32        # OpenGL 
+    )
+endif()
 # 开启预编译头 PCH
 target_precompile_headers(${ENGINE_NAME} PRIVATE engin/include/GE/pch.h)
 
