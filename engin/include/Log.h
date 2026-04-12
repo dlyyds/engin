@@ -1,9 +1,13 @@
 #pragma once
 
 #include "Core.h"
-#include "spdlog/logger.h"
-#include "spdlog/spdlog.h"
+
 #include <memory>
+
+namespace spdlog {
+class logger; // 前向声明，不#include
+}
+
 namespace GE {
 class GE_API Log {
 public:
@@ -21,3 +25,15 @@ private:
 };
 
 } // namespace GE
+
+#define GE_CORE_TRACE(...) ::GE::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define GE_CORE_INFO(...) ::GE::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define GE_CORE_WARN(...) ::GE::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define GE_CORE_ERROR(...) ::GE::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define GE_CORE_FATAL(...) ::GE::Log::GetCoreLogger()->fatal(__VA_ARGS__)
+
+#define GE_TRACE(...) ::GE::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define GE_INFO(...) ::GE::Log::GetClientLogger()->info(__VA_ARGS__)
+#define GE_WARN(...) ::GE::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define GE_ERROR(...) ::GE::Log::GetClientLogger()->error(__VA_ARGS__)
+#define GE_FATAL(...) ::GE::Log::GetClientLogger()->fatal(__VA_ARGS__)

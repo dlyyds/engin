@@ -1,8 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"F:/yxy/GameEngine/engin/bin/int/cmake_install.cmake",
-		"F:/yxy/GameEngine/engin/bin/int/vendor/spdlog/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

@@ -4,6 +4,7 @@
 **/bin/
 **/build/
 **/int/
+**/.cache
 *.exe
 *.dll
 *.dll.a
