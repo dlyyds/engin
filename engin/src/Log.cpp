@@ -1,7 +1,7 @@
-#include "spdlog/common.h"
-#include "spdlog/spdlog.h"
+
+#include "pch.h"
+
 #include <Log.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace GE {
 

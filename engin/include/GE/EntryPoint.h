@@ -1,7 +1,6 @@
 #pragma once
 #include "Log.h"
 #include <GE.h>
-#include <iostream>
 
 #ifdef _WIN64
 

@@ -29,15 +29,18 @@ add_subdirectory(engin/vendor/spdlog)
 
 file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/*.cpp
-    ${CMAKE_SOURCE_DIR}/engin/include/*.h
+    ${CMAKE_SOURCE_DIR}/engin/include/**/*.h
+
 )
 
 
 add_library(${ENGINE_NAME} SHARED ${ENGINE_SRC})
-target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/engin/include)
+target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/engin/include/GE)
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
 target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog)
 
+# 开启预编译头 PCH
+target_precompile_headers(${ENGINE_NAME} PRIVATE engin/include/GE/pch.h)
 
 #Sandbox EXE 调用 DLL
 # ==============================================

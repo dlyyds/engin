@@ -1,15 +1,27 @@
 [
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\GameEngine.dir\\engin\\src\\Application.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Application.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -Winvalid-pch -x c++-header -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.gch -c F:\\yxy\\GameEngine\\bin-int\\CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.cxx",
+  "file": "F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx.cxx",
+  "output": "CMakeFiles/GameEngine.dir/cmake_pch.hxx.gch"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Application.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Application.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Application.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Application.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\GameEngine.dir\\engin\\src\\Log.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Log.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Log.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Log.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Log.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Log.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=c++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\pch.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\pch.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/pch.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/pch.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",

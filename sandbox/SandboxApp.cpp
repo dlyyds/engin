@@ -1,6 +1,5 @@
 
-#include "EntryPoint.h"
-#include "GE.h"
+#include "GE/GE.h"
 #include <iostream>
 
 class Sandbox : public GE::Application {
