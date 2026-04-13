@@ -6,9 +6,6 @@ project(GameEngine)
 
 set(CMAKE_BUILD_TYPE Debug)
 
-
-
-set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 输出目录
@@ -27,20 +24,25 @@ set(APP_NAME Sandbox)
 
 add_subdirectory(engin/vendor/spdlog)
 add_subdirectory(engin/vendor/glfw)
+add_subdirectory(engin/vendor/glad)
+add_subdirectory(engin/vendor/imgui)
 
 file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/platform/windows/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/src/ImGui/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
+    ${CMAKE_SOURCE_DIR}/engin/include/GE/ImGui/*.h
 )
 
 
 add_library(${ENGINE_NAME} SHARED ${ENGINE_SRC})
-target_include_directories(${ENGINE_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/engin/include/GE)
+target_include_directories(${ENGINE_NAME} PUBLIC 
+${CMAKE_SOURCE_DIR}/engin/include/GE
+)
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
-target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw)
-target_compile_features(${ENGINE_NAME} PUBLIC cxx_std_17)
+target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
 
 
 if(WIN32)
@@ -50,6 +52,7 @@ if(WIN32)
 endif()
 # 开启预编译头 PCH
 target_precompile_headers(${ENGINE_NAME} PRIVATE engin/include/GE/pch.h)
+
 
 #Sandbox EXE 调用 DLL
 # ==============================================

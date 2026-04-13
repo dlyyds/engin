@@ -4,3 +4,6 @@
 [submodule "engin/vendor/GLFW"]
 	path = engin/vendor/GLFW
 	url = https://gitcode.com/GitHub_Trending/gl/glfw.git
+[submodule "engin/vendor/imgui"]
+	path = engin/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
