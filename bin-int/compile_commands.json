@@ -13,6 +13,18 @@
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Layer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Layer.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/Layer.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/Layer.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\LayerStack.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\LayerStack.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/LayerStack.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/LayerStack.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
   "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Log.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Log.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Log.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Log.cpp.obj"

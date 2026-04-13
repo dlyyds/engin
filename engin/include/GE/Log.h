@@ -3,9 +3,8 @@
 #include "Core.h"
 #include <memory>
 
-namespace spdlog {
-class logger; // 前向声明，不#include
-}
+#include "spdlog/common.h"
+#include "spdlog/spdlog.h"
 
 namespace GE {
 class GE_API Log {
