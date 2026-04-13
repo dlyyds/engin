@@ -7,3 +7,5 @@
 #include "Log.h"
 
 #include "WindowsWindow.h"
+
+#include "LayerStack.h"
