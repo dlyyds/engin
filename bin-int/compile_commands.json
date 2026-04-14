@@ -19,6 +19,12 @@
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiFn.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiFn.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/ImGui/ImGuiFn.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/ImGui/ImGuiFn.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
   "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiLayer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiLayer.cpp",
   "file": "F:/yxy/GameEngine/engin/src/ImGui/ImGuiLayer.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/ImGui/ImGuiLayer.cpp.obj"
