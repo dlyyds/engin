@@ -1,97 +1,103 @@
 [
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -x c++-header -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.gch -c F:\\yxy\\GameEngine\\bin-int\\CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.cxx",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -x c++-header -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.gch -c F:\\yxy\\GameEngine\\bin-int\\CMakeFiles\\GameEngine.dir\\cmake_pch.hxx.cxx",
   "file": "F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx.cxx",
   "output": "CMakeFiles/GameEngine.dir/cmake_pch.hxx.gch"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Application.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Application.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Application.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Application.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Application.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Application.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiLayer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiLayer.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiLayer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiLayer.cpp",
   "file": "F:/yxy/GameEngine/engin/src/ImGui/ImGuiLayer.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/ImGui/ImGuiLayer.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Layer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Layer.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Layer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Layer.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Layer.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Layer.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\LayerStack.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\LayerStack.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\LayerStack.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\LayerStack.cpp",
   "file": "F:/yxy/GameEngine/engin/src/LayerStack.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/LayerStack.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Log.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Log.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\Log.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\Log.cpp",
   "file": "F:/yxy/GameEngine/engin/src/Log.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/Log.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\pch.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\pch.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\pch.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\pch.cpp",
   "file": "F:/yxy/GameEngine/engin/src/pch.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/pch.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\platform\\windows\\WindowsWindow.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\platform\\windows\\WindowsWindow.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\platform\\windows\\WindowsInput.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\platform\\windows\\WindowsInput.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/platform/windows/WindowsInput.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/platform/windows/WindowsInput.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\platform\\windows\\WindowsWindow.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\platform\\windows\\WindowsWindow.cpp",
   "file": "F:/yxy/GameEngine/engin/src/platform/windows/WindowsWindow.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/platform/windows/WindowsWindow.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB @CMakeFiles/Sandbox.dir/includes_CXX.rsp -g -o CMakeFiles\\Sandbox.dir\\sandbox\\SandboxApp.cpp.obj -c F:\\yxy\\GameEngine\\sandbox\\SandboxApp.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB @CMakeFiles/Sandbox.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\Sandbox.dir\\sandbox\\SandboxApp.cpp.obj -c F:\\yxy\\GameEngine\\sandbox\\SandboxApp.cpp",
   "file": "F:/yxy/GameEngine/sandbox/SandboxApp.cpp",
   "output": "CMakeFiles/Sandbox.dir/sandbox/SandboxApp.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\spdlog.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\spdlog.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\spdlog.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\spdlog.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/spdlog.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/spdlog.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\stdout_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\stdout_sinks.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\stdout_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\stdout_sinks.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/stdout_sinks.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/stdout_sinks.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\color_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\color_sinks.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\color_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\color_sinks.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/color_sinks.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/color_sinks.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\file_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\file_sinks.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\file_sinks.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\file_sinks.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/file_sinks.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/file_sinks.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\async.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\async.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\async.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\async.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/async.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/async.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\cfg.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\cfg.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\cfg.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\cfg.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/cfg.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/cfg.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/spdlog",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++11 -o CMakeFiles\\spdlog.dir\\src\\bundled_fmtlib_format.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\bundled_fmtlib_format.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DSPDLOG_COMPILED_LIB -DSPDLOG_FWRITE_UNLOCKED @CMakeFiles/spdlog.dir/includes_CXX.rsp -g -std=c++17 -o CMakeFiles\\spdlog.dir\\src\\bundled_fmtlib_format.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\spdlog\\src\\bundled_fmtlib_format.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/spdlog/src/bundled_fmtlib_format.cpp",
   "output": "engin/vendor/spdlog/CMakeFiles/spdlog.dir/src/bundled_fmtlib_format.cpp.obj"
 },
@@ -229,43 +235,43 @@
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\imgui.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\imgui_draw.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_draw.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_draw.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_draw.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui_draw.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui_draw.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\imgui_widgets.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_widgets.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_widgets.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_widgets.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui_widgets.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui_widgets.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\imgui_tables.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_tables.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_tables.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_tables.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui_tables.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui_tables.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_demo.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_demo.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui_demo.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui_demo.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_glfw.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_glfw.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_glfw.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_glfw.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/backends/imgui_impl_glfw.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_glfw.cpp.obj"
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_opengl3.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_opengl3.cpp",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_opengl3.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_opengl3.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/backends/imgui_impl_opengl3.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.obj"
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-
+set(CMAKE_CXX_STANDARD 17)
 # 总项目名称
 project(GameEngine)
 
@@ -34,6 +34,7 @@ file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/ImGui/*.h
+    ${CMAKE_SOURCE_DIR}/engin/src/platform/windows/*.h
 )
 
 
