@@ -13,6 +13,12 @@
 },
 {
   "directory": "F:/yxy/GameEngine/bin-int",
+  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiBuild.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiBuild.cpp",
+  "file": "F:/yxy/GameEngine/engin/src/ImGui/ImGuiBuild.cpp",
+  "output": "CMakeFiles/GameEngine.dir/engin/src/ImGui/ImGuiBuild.cpp.obj"
+},
+{
+  "directory": "F:/yxy/GameEngine/bin-int",
   "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE -DGAME_ENGINE_BUILD -DGameEngine_EXPORTS -DSPDLOG_COMPILED_LIB @CMakeFiles/GameEngine.dir/includes_CXX.rsp -g -std=gnu++17 -Winvalid-pch -include F:/yxy/GameEngine/bin-int/CMakeFiles/GameEngine.dir/cmake_pch.hxx -o CMakeFiles\\GameEngine.dir\\engin\\src\\ImGui\\ImGuiLayer.cpp.obj -c F:\\yxy\\GameEngine\\engin\\src\\ImGui\\ImGuiLayer.cpp",
   "file": "F:/yxy/GameEngine/engin/src/ImGui/ImGuiLayer.cpp",
   "output": "CMakeFiles/GameEngine.dir/engin/src/ImGui/ImGuiLayer.cpp.obj"
@@ -262,17 +268,5 @@
   "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\imgui_demo.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\imgui_demo.cpp",
   "file": "F:/yxy/GameEngine/engin/vendor/imgui/imgui_demo.cpp",
   "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/imgui_demo.cpp.obj"
-},
-{
-  "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_glfw.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_glfw.cpp",
-  "file": "F:/yxy/GameEngine/engin/vendor/imgui/backends/imgui_impl_glfw.cpp",
-  "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_glfw.cpp.obj"
-},
-{
-  "directory": "F:/yxy/GameEngine/bin-int/engin/vendor/imgui",
-  "command": "C:\\PROGRA~1\\mingw64\\bin\\C__~1.EXE  @CMakeFiles/imgui.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\imgui.dir\\backends\\imgui_impl_opengl3.cpp.obj -c F:\\yxy\\GameEngine\\engin\\vendor\\imgui\\backends\\imgui_impl_opengl3.cpp",
-  "file": "F:/yxy/GameEngine/engin/vendor/imgui/backends/imgui_impl_opengl3.cpp",
-  "output": "engin/vendor/imgui/CMakeFiles/imgui.dir/backends/imgui_impl_opengl3.cpp.obj"
 }
 ]

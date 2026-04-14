@@ -1,10 +1,13 @@
+#include "pch.h"
 
-#include "platform/windows/WindowsWindow.h"
 #include "Event/ApplicationEvent.h"
 #include "Event/KeyEvent.h"
 #include "Event/MouseEvent.h"
+
 #include "Log.h"
-#include "pch.h"
+#include "platform/windows/WindowsWindow.h"
+
+#include "glad/glad.h"
 
 namespace GE {
 
@@ -40,6 +43,9 @@ void WindowsWindow::Init(const WindowProps &props) {
 
     m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
     glfwMakeContextCurrent(m_Window);
+    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    GE_CORE_ASSERT(status, "Failed to initialize Glad!");
+
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 

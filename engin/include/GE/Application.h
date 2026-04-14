@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Event/ApplicationEvent.h"
 #include "GEWindow.h"
+#include "ImGui/ImGuiLayer.h"
 #include "Layer.h"
 #include "LayerStack.h"
 #include <memory>
@@ -10,24 +11,27 @@
 namespace GE {
 
 class GE_API Application {
-public:
-  Application();
-  virtual ~Application();
-  void Run();
-  void OnEvent(Event &e);
+  public:
+    Application();
+    virtual ~Application();
+    void Run();
+    void OnEvent(Event &e);
 
-  void PushLayer(Layer *layer);
-  void PushOverlay(Layer *layer);
+    void PushLayer(Layer *layer);
+    void PushOverlay(Layer *layer);
 
-  inline Window &GetWindow() { return *m_Window; }
-  inline static Application &Get() { return *s_Instance; }
+    inline Window &GetWindow() { return *m_Window; }
+    inline static Application &Get() { return *s_Instance; }
 
-private:
-  std::unique_ptr<Window> m_Window;
-  bool m_Running = true;
-  bool OnWindowClose(WindowCloseEvent &e);
-  LayerStack m_LayerStack;
-  static Application *s_Instance;
+  private:
+    std::unique_ptr<Window> m_Window;
+
+    ImGuiLayer *m_ImGuiLayer;
+
+    bool m_Running = true;
+    bool OnWindowClose(WindowCloseEvent &e);
+    LayerStack m_LayerStack;
+    static Application *s_Instance;
 };
 
 Application *CreateApplication();
