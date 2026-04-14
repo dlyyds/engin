@@ -1,7 +1,9 @@
+#include "pch.h"
+
 #include "Application.h"
 #include "GEWindow.h"
 #include "Log.h"
-#include "pch.h"
+
 #include <Event/ApplicationEvent.h>
 #include <GLFW/glfw3.h>
 #include <functional>
@@ -38,7 +40,7 @@ void Application::OnEvent(Event &e) {
   EventDispatcher dispatcher(e);
   dispatcher.Dispatch<WindowCloseEvent>(
       std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
-  GE_CORE_TRACE(e);
+  GE_CORE_TRACE("Application::OnEvent {0}", e);
   for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
     (*--it)->OnEvent(e);
     if (e.Handled)

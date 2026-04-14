@@ -16,8 +16,13 @@ public:
 class Sandbox : public GE::Application {
 public:
   Sandbox() {
-    PushLayer(new ExampleLayer());
-    PushOverlay(new GE::ImGuiLayer());
+    // PushLayer(new ExampleLayer());
+    //  GE::WindowsWindow &window =  ;
+
+    auto &win =
+        static_cast<GE::WindowsWindow &>(GE::Application::Get().GetWindow());
+
+    PushOverlay(new GE::ImGuiLayer(win.GetGLFWwindow()));
   }
   ~Sandbox() {}
 };

@@ -2,6 +2,7 @@
 
 # Build directories and output files
 **/bin/
+**/bin-int/*
 **/build/
 **/int/
 **/.cache
