@@ -25,6 +25,7 @@ enum class EventType {
   AppRender,
   KeyPressed,
   KeyReleased,
+  KeyTyped,
   MouseButtonPressed,
   MouseButtonReleased,
   MouseMoved,
