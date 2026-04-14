@@ -14,16 +14,30 @@ class ExampleLayer : public GE::Layer {
     ExampleLayer() : Layer("Example") {}
 
     void OnUpdate() override {
-        // GE_INFO("ExampleLayer::Update");
+        // if (GE::Input::IsKeyPressed(GE_KEY_TAB))
+        //     GE_TRACE("Tab key is pressed (poll)!");
     }
 
-    void OnEvent(GE::Event &event) override { GE_TRACE("{0}", event); }
+    virtual void OnImGuiRender() override {
+        GE::ImGui::Begin("Test");
+        GE::ImGui::Text("Hello World");
+        GE::ImGui::End();
+    }
+
+    void OnEvent(GE::Event &event) override {
+        // if (event.GetEventType() == GE::EventType::KeyPressed) {
+        //     GE::KeyPressedEvent &e = (GE::KeyPressedEvent &)event;
+        //     if (e.GetKeyCode() == GE_KEY_TAB)
+        //         GE_TRACE("Tab key is pressed (event)!");
+        //     GE_TRACE("{0}", (char)e.GetKeyCode());
+        // }
+    }
 };
 
 class Sandbox : public GE::Application {
   public:
     Sandbox() {
-        // PushLayer(new ExampleLayer());
+        PushOverlay(new ExampleLayer());
         //  GE::WindowsWindow &window =  ;
 
         // PushOverlay(new GE::ImGuiLayer());

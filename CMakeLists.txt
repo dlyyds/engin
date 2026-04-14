@@ -44,7 +44,7 @@ ${CMAKE_SOURCE_DIR}/engin/include/GE
 ${CMAKE_SOURCE_DIR}/engin/vendor/glm
 )
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
-target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
+target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad $<LINK_LIBRARY:WHOLE_ARCHIVE,imgui> )
 
 
 if(WIN32)
@@ -62,5 +62,6 @@ add_executable(${APP_NAME} ${CMAKE_SOURCE_DIR}/sandbox/SandboxApp.cpp)
 target_include_directories(${APP_NAME} PRIVATE 
 ${CMAKE_SOURCE_DIR}/engin/include
 ${CMAKE_SOURCE_DIR}/engin/vendor/glm
+${CMAKE_SOURCE_DIR}/engin/vendor/imgui
 )
 target_link_libraries(${APP_NAME} PRIVATE ${ENGINE_NAME})
