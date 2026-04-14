@@ -41,6 +41,7 @@ file(GLOB ENGINE_SRC
 add_library(${ENGINE_NAME} SHARED ${ENGINE_SRC})
 target_include_directories(${ENGINE_NAME} PUBLIC 
 ${CMAKE_SOURCE_DIR}/engin/include/GE
+${CMAKE_SOURCE_DIR}/engin/vendor/glm
 )
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
 target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
@@ -58,5 +59,8 @@ target_precompile_headers(${ENGINE_NAME} PRIVATE engin/include/GE/pch.h)
 #Sandbox EXE 调用 DLL
 # ==============================================
 add_executable(${APP_NAME} ${CMAKE_SOURCE_DIR}/sandbox/SandboxApp.cpp)
-target_include_directories(${APP_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/engin/include)
+target_include_directories(${APP_NAME} PRIVATE 
+${CMAKE_SOURCE_DIR}/engin/include
+${CMAKE_SOURCE_DIR}/engin/vendor/glm
+)
 target_link_libraries(${APP_NAME} PRIVATE ${ENGINE_NAME})

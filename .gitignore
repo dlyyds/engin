@@ -2,7 +2,7 @@
 
 # Build directories and output files
 **/bin/
-**/bin-int/*
+**/bin-int/
 **/build/
 **/int/
 **/.cache
@@ -12,7 +12,7 @@
 *.obj
 *.o
 *.out
-
+engin/vendor/
 # CMake generated files
 CMakeCache.txt
 CMakeFiles/

@@ -1,3 +1,0 @@
-F:/yxy/GameEngine/sandbox/build/CMakeFiles/sandbox.dir
-F:/yxy/GameEngine/sandbox/build/CMakeFiles/edit_cache.dir
-F:/yxy/GameEngine/sandbox/build/CMakeFiles/rebuild_cache.dir
