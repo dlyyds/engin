@@ -3,28 +3,27 @@
 #include <iostream>
 
 class ExampleLayer : public GE::Layer {
-public:
-  ExampleLayer() : Layer("Example") {}
+  public:
+    ExampleLayer() : Layer("Example") {}
 
-  void OnUpdate() override {
-    // GE_INFO("ExampleLayer::Update");
-  }
+    void OnUpdate() override {
+        // GE_INFO("ExampleLayer::Update");
+    }
 
-  void OnEvent(GE::Event &event) override { GE_TRACE("{0}", event); }
+    void OnEvent(GE::Event &event) override { GE_TRACE("{0}", event); }
 };
 
 class Sandbox : public GE::Application {
-public:
-  Sandbox() {
-    // PushLayer(new ExampleLayer());
-    //  GE::WindowsWindow &window =  ;
+  public:
+    Sandbox() {
+        // PushLayer(new ExampleLayer());
+        //  GE::WindowsWindow &window =  ;
 
-    auto &win =
-        static_cast<GE::WindowsWindow &>(GE::Application::Get().GetWindow());
+        auto &win = static_cast<GE::WindowsWindow &>(GE::Application::Get().GetWindow());
 
-    PushOverlay(new GE::ImGuiLayer(win.GetGLFWwindow()));
-  }
-  ~Sandbox() {}
+        PushOverlay(new GE::ImGuiLayer((GLFWwindow *)GE::Application::Get().GetWindow().GetNativeWindow()));
+    }
+    ~Sandbox() {}
 };
 
 GE::Application *GE::CreateApplication() { return new Sandbox(); }
