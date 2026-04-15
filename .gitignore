@@ -53,3 +53,4 @@ logs/
 sandbox/sandbox.exe
 sandbox/libGameEngine.dll
 sandbox/libGameEngine.dll.a
+bin-int/compile_commands.json
