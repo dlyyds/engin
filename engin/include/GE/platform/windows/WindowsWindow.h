@@ -2,7 +2,9 @@
 
 #include "GEWindow.h"
 #define GLFW_INCLUDE_NONE
-#include <GLFW/glfw3.h>
+#include "Renderer/GraphicsContext.h"
+
+struct GLFWwindow {};
 
 namespace GE {
 
@@ -28,6 +30,7 @@ class WindowsWindow : public Window {
 
   private:
     GLFWwindow *m_Window;
+    GraphicsContext *m_Context;
 
     struct WindowData {
         std::string Title;

@@ -4,3 +4,5 @@ IndentWidth: 4
 UseTab: Never
 BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
+
+IndentPPDirectives: AfterHash
