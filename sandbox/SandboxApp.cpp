@@ -9,6 +9,8 @@
 #include <glm/vec3.hpp>                  // glm::vec3
 #include <glm/vec4.hpp>                  // glm::vec4
 
+#include "imgui.h"
+
 class ExampleLayer : public GE::Layer {
   public:
     ExampleLayer() : Layer("Example") {}
@@ -19,9 +21,9 @@ class ExampleLayer : public GE::Layer {
     }
 
     virtual void OnImGuiRender() override {
-        GE::ImGui::Begin("Test");
-        GE::ImGui::Text("Hello World");
-        GE::ImGui::End();
+        ImGui::Begin("Test");
+        ImGui::Text("Hello World");
+        ImGui::End();
     }
 
     void OnEvent(GE::Event &event) override {

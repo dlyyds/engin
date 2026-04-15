@@ -29,22 +29,24 @@ add_subdirectory(engin/vendor/imgui)
 
 file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/*.cpp
-    ${CMAKE_SOURCE_DIR}/engin/src/platform/windows/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/src/Platform/Windows/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/src/Platform/OpenGL/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/ImGui/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/ImGui/*.h
-    ${CMAKE_SOURCE_DIR}/engin/src/platform/windows/*.h
+    ${CMAKE_SOURCE_DIR}/engin/src/Platform/Windows/*.h
+    ${CMAKE_SOURCE_DIR}/engin/src/Platform/OpenGL/*.h
 )
 
 
-add_library(${ENGINE_NAME} SHARED ${ENGINE_SRC})
+add_library(${ENGINE_NAME} STATIC ${ENGINE_SRC})
 target_include_directories(${ENGINE_NAME} PUBLIC 
 ${CMAKE_SOURCE_DIR}/engin/include/GE
 ${CMAKE_SOURCE_DIR}/engin/vendor/glm
 )
 target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
-target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad $<LINK_LIBRARY:WHOLE_ARCHIVE,imgui> )
+target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
 
 
 if(WIN32)

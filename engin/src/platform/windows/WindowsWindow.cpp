@@ -5,9 +5,11 @@
 #include "Event/MouseEvent.h"
 
 #include "Log.h"
-#include "platform/windows/WindowsWindow.h"
+#include "Platform/Windows/WindowsWindow.h"
 
-#include "glad/glad.h"
+#include "Platform/OpenGl/OpenGlContext.h"
+
+#include "GLFW/glfw3.h"
 
 namespace GE {
 
@@ -42,9 +44,11 @@ void WindowsWindow::Init(const WindowProps &props) {
     }
 
     m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-    glfwMakeContextCurrent(m_Window);
-    int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-    GE_CORE_ASSERT(status, "Failed to initialize Glad!");
+    // glfwMakeContextCurrent(m_Window);
+    // int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+    // GE_CORE_ASSERT(status, "Failed to initialize Glad!");
+    m_Context = new OpenGLContext(m_Window);
+    m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
@@ -127,7 +131,7 @@ void WindowsWindow::Shutdown() { glfwDestroyWindow(m_Window); }
 
 void WindowsWindow::OnUpdate() {
     glfwPollEvents();
-    glfwSwapBuffers(m_Window);
+    m_Context->SwapBuffers();
 }
 
 void WindowsWindow::SetVSync(bool enabled) {
