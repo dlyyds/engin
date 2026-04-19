@@ -1,7 +1,6 @@
 #pragma once
 
 #include "GEWindow.h"
-#define GLFW_INCLUDE_NONE
 #include "Renderer/GraphicsContext.h"
 
 struct GLFWwindow {};

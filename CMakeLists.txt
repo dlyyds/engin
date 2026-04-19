@@ -45,7 +45,11 @@ target_include_directories(${ENGINE_NAME} PUBLIC
 ${CMAKE_SOURCE_DIR}/engin/include/GE
 ${CMAKE_SOURCE_DIR}/engin/vendor/glm
 )
-target_compile_definitions(${ENGINE_NAME} PRIVATE GAME_ENGINE_BUILD)
+target_compile_definitions(${ENGINE_NAME} PRIVATE 
+GAME_ENGINE_BUILD 
+GLFW_INCLUDE_NONE
+GE_PLATFORM_WINDOWS
+)
 target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
 
 

@@ -6,3 +6,8 @@ BinPackParameters: false
 AllowAllParametersOfDeclarationOnNextLine: false
 
 IndentPPDirectives: AfterHash
+
+BreakArrays: true
+AllowShortArraysOnSingleLine: false
+BinPackArguments: false
+AlignConsecutiveDeclarations: true
