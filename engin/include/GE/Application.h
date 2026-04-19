@@ -7,6 +7,7 @@
 #include "Layer.h"
 #include "LayerStack.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/VertexAttay.h"
 #include <memory>
 
 namespace GE {
@@ -26,11 +27,9 @@ public:
   inline static Application &Get() { return *s_Instance; }
 
 private:
-  unsigned int m_VertexArray;
-  std::unique_ptr<Shader> m_Shader;
-  std::unique_ptr<VertexBuffer> m_VertexBuffer;
-  std::unique_ptr<IndexBuffer> m_IndexBuffer;
+  std::shared_ptr<Shader> m_Shader;
 
+  std::shared_ptr<VertexArray> m_VertexArray;
   std::unique_ptr<Window> m_Window;
 
   ImGuiLayer *m_ImGuiLayer;
