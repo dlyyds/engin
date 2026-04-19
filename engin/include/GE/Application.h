@@ -24,6 +24,8 @@ class GE_API Application {
     inline static Application &Get() { return *s_Instance; }
 
   private:
+    unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
     std::unique_ptr<Window> m_Window;
 
     ImGuiLayer *m_ImGuiLayer;
