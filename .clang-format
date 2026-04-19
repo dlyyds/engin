@@ -1,19 +1,19 @@
+# 基础样式
 BasedOnStyle: LLVM
 ColumnLimit: 120
 IndentWidth: 4
 UseTab: Never
+
+# 函数参数不打包，强制分行风格
 BinPackParameters: false
+BinPackArguments: false
 AllowAllParametersOfDeclarationOnNextLine: false
 
+# 预处理指令缩进
 IndentPPDirectives: AfterHash
 
-BreakArrays: true
-AllowShortArraysOnSingleLine: false
-BinPackArguments: false
-AlignConsecutiveDeclarations: true
+# 枚举成员强制一行显示
+AllowShortEnumsOnASingleLine: true
+KeepEnumDefinitionsInOneLine: true
 
-# ========== 修复连续声明对齐（关键） ==========
-AlignConsecutiveDeclarations: true    # 变量/函数声明对齐
-AlignConsecutiveAssignments: true     # 赋值语句对齐
-AlignConsecutiveMacros: true          # 宏定义对齐
-AlignConsecutiveBitFields: true       # 位段对齐
+
