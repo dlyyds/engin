@@ -32,11 +32,14 @@ file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/Platform/Windows/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/Platform/OpenGL/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/ImGui/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/src/Renderer/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/ImGui/*.h
     ${CMAKE_SOURCE_DIR}/engin/src/Platform/Windows/*.h
     ${CMAKE_SOURCE_DIR}/engin/src/Platform/OpenGL/*.h
+     ${CMAKE_SOURCE_DIR}/engin/src/Renderer/*.h
+    
 )
 
 
