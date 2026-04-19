@@ -8,6 +8,6 @@ public:
   void Unbind();
 
 private:
-  uint32_t m_RenderId;
+  uint32_t m_RendererID;
 };
 } // namespace GE

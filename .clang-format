@@ -11,3 +11,9 @@ BreakArrays: true
 AllowShortArraysOnSingleLine: false
 BinPackArguments: false
 AlignConsecutiveDeclarations: true
+
+# ========== 修复连续声明对齐（关键） ==========
+AlignConsecutiveDeclarations: true    # 变量/函数声明对齐
+AlignConsecutiveAssignments: true     # 赋值语句对齐
+AlignConsecutiveMacros: true          # 宏定义对齐
+AlignConsecutiveBitFields: true       # 位段对齐
