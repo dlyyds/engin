@@ -3,6 +3,7 @@ BasedOnStyle: LLVM
 ColumnLimit: 120
 IndentWidth: 4
 UseTab: Never
+<<<<<<< HEAD
 
 
 # 预处理指令缩进
@@ -24,3 +25,19 @@ BreakArrays: false
 SpaceAfterComma: true
 # 赋值符号左右加空格
 SpaceBeforeAssignmentOperators: true
+=======
+
+# 函数参数不打包，强制分行风格
+BinPackParameters: false
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# 预处理指令缩进
+IndentPPDirectives: AfterHash
+
+# 枚举成员强制一行显示
+AllowShortEnumsOnASingleLine: true
+KeepEnumDefinitionsInOneLine: true
+
+
+>>>>>>> c7ddd282421a1409846c7a81dfaa0cd43efca802
