@@ -20,5 +20,5 @@
 #include "glad/glad.h"
 
 #ifdef GE_PLATFORM_WINDOWS
-#    include <Windows.h>
+#include <Windows.h>
 #endif
