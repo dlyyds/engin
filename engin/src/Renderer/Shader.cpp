@@ -1,7 +1,7 @@
 
 #include "Renderer/Shader.h"
 #include "Log.h"
-
+#include "glm/gtc/type_ptr.hpp"
 #include "pch.h"
 
 namespace GE {
@@ -105,14 +105,13 @@ Shader::Shader(const std::string &vertexSrc, const std::string &fragmentSrc) {
     glDetachShader(program, vertexShader);
     glDetachShader(program, fragmentShader);
 }
-Shader::~Shader() {
-    glDeleteProgram(m_RendererID);
-}
-void Shader::Bind() {
-    glUseProgram(m_RendererID);
-}
-void Shader::Unbind() {
-    glUseProgram(0);
+Shader::~Shader() { glDeleteProgram(m_RendererID); }
+void Shader::Bind() { glUseProgram(m_RendererID); }
+void Shader::Unbind() { glUseProgram(0); }
+
+void Shader::UploadUniformMat4(const std::string name, const glm::mat4 &matrix) {
+    GLint location = glGetUniformLocation(m_RendererID, name.c_str());
+    glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 } // namespace GE
