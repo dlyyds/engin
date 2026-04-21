@@ -7,6 +7,7 @@
 #include "Layer.h"
 #include "LayerStack.h"
 #include "Renderer/Buffer.h"
+#include "Renderer/OrthographicCamera.h"
 #include "Renderer/VertexArray.h"
 #include <memory>
 
@@ -14,30 +15,32 @@ namespace GE {
 class Shader;
 
 class GE_API Application {
-public:
-  Application();
-  virtual ~Application();
-  void Run();
-  void OnEvent(Event &e);
+  public:
+    Application();
+    virtual ~Application();
+    void Run();
+    void OnEvent(Event &e);
 
-  void PushLayer(Layer *layer);
-  void PushOverlay(Layer *layer);
+    void PushLayer(Layer *layer);
+    void PushOverlay(Layer *layer);
 
-  inline Window &GetWindow() { return *m_Window; }
-  inline static Application &Get() { return *s_Instance; }
+    inline Window &GetWindow() { return *m_Window; }
+    inline static Application &Get() { return *s_Instance; }
 
-private:
-  std::shared_ptr<Shader> m_Shader;
+  private:
+    std::shared_ptr<Shader> m_Shader;
 
-  std::shared_ptr<VertexArray> m_VertexArray;
-  std::unique_ptr<Window> m_Window;
+    std::shared_ptr<VertexArray> m_VertexArray;
+    std::unique_ptr<Window> m_Window;
 
-  ImGuiLayer *m_ImGuiLayer;
+    ImGuiLayer *m_ImGuiLayer;
 
-  bool m_Running = true;
-  bool OnWindowClose(WindowCloseEvent &e);
-  LayerStack m_LayerStack;
-  static Application *s_Instance;
+    bool m_Running = true;
+    bool OnWindowClose(WindowCloseEvent &e);
+    LayerStack m_LayerStack;
+    OrthographicCamera m_Camera;
+
+    static Application *s_Instance;
 };
 
 Application *CreateApplication();
