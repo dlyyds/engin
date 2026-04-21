@@ -1,4 +1,6 @@
 
+#pragma once
+
 namespace GE {
 class Shader {
 public:

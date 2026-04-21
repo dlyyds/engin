@@ -7,7 +7,7 @@
 #include "Layer.h"
 #include "LayerStack.h"
 #include "Renderer/Buffer.h"
-#include "Renderer/VertexAttay.h"
+#include "Renderer/VertexArray.h"
 #include <memory>
 
 namespace GE {

@@ -3,7 +3,6 @@ BasedOnStyle: LLVM
 ColumnLimit: 120
 IndentWidth: 4
 UseTab: Never
-<<<<<<< HEAD
 
 
 # 预处理指令缩进
@@ -13,6 +12,8 @@ IndentPPDirectives: AfterHash
 BreakBeforeBraces: Attach
 # 强制函数体换行，即使只有一行代码，绝不压缩成一行
 AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: Never
 #短case不换行
 AllowShortCaseLabelsOnASingleLine: true
 
@@ -21,23 +22,4 @@ AllowShortCaseLabelsOnASingleLine: true
 AlignArrayOfStructures: Left
 # 数组大括号不单独换行
 BreakArrays: false
-# 逗号后加空格，保持清爽
-SpaceAfterComma: true
-# 赋值符号左右加空格
-SpaceBeforeAssignmentOperators: true
-=======
 
-# 函数参数不打包，强制分行风格
-BinPackParameters: false
-BinPackArguments: false
-AllowAllParametersOfDeclarationOnNextLine: false
-
-# 预处理指令缩进
-IndentPPDirectives: AfterHash
-
-# 枚举成员强制一行显示
-AllowShortEnumsOnASingleLine: true
-KeepEnumDefinitionsInOneLine: true
-
-
->>>>>>> c7ddd282421a1409846c7a81dfaa0cd43efca802
