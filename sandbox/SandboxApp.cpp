@@ -5,38 +5,155 @@
 #include <glm/ext/matrix_clip_space.hpp> // glm::perspective
 #include <glm/ext/matrix_transform.hpp>  // glm::translate, glm::rotate, glm::scale
 #include <glm/ext/scalar_constants.hpp>  // glm::pi
-#include <glm/mat4x4.hpp>                // glm::mat4
-#include <glm/vec3.hpp>                  // glm::vec3
-#include <glm/vec4.hpp>                  // glm::vec4
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/mat4x4.hpp> // glm::mat4
+#include <glm/vec3.hpp>   // glm::vec3
+#include <glm/vec4.hpp>   // glm::vec4
+
+#include "Platform/OpenGL/OpenGLShader.h"
 
 #include "imgui.h"
 
-class ExampleLayer : public GE::Layer {
-  public:
-    ExampleLayer() : Layer("Example") {}
+namespace GE {
 
-    void OnUpdate() override {
-        // if (GE::Input::IsKeyPressed(GE_KEY_TAB))
-        //     GE_TRACE("Tab key is pressed (poll)!");
+class ExampleLayer : public Layer {
+  public:
+    ExampleLayer() : Layer("Example"), m_Camera(-1.6, 1.6, -0.9, 0.9) {
+        m_VertexArray.reset(VertexArray::Create());
+
+        float vertices[4 * 7] = {
+            -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, // 0 左下角
+            0.5f,  -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f, // 1 右下角
+            0.5f,  0.5f,  0.0f, 0.8f, 0.8f, 0.2f, 1.0f, // 2 右上角
+            -0.5f, 0.5f,  0.0f, 1.0f, 0.4f, 0.4f, 1.0f  // 3 左上角
+        };
+        std::shared_ptr<VertexBuffer> vertexBuffer;
+        vertexBuffer =
+            std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
+        BufferLayout layout = {
+            {ShaderDataType::Float3, "a_Position"},
+            {ShaderDataType::Float4, "a_Color"   }
+        };
+        vertexBuffer->SetLayout(layout);
+        m_VertexArray->AddVertexBuffer(vertexBuffer);
+
+        std::shared_ptr<IndexBuffer> indexBuffer;
+        uint32_t indices[6] = {0, 1, 2, 0, 2, 3};
+        indexBuffer = std::shared_ptr<IndexBuffer>(
+            IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+        m_VertexArray->SetIndexBuffer(indexBuffer);
+
+        std::string vertexSrc = R"(
+    #version 330 core
+    layout(location = 0)in vec3 a_Position;
+    layout(location = 1)in vec4 a_Color;
+
+    uniform mat4 u_ViewProjection;
+    uniform mat4 u_Transform;
+    out vec3 v_Position;
+    out vec4 v_Color;
+    void main(){
+      v_Position = a_Position;
+      v_Color = a_Color;
+      gl_Position = u_ViewProjection * u_Transform * vec4( a_Position,1.0);
+    }
+  
+  )";
+        std::string fragmentSrc = R"(
+    #version 330 core
+    layout(location = 0)out vec4 color;
+    in vec3 v_Position;
+    in vec4 v_Color;
+    uniform vec4 u_Color; 
+    void main(){
+      color =u_Color;
+    }
+    
+  )";
+        m_Shader.reset(Shader::Create(vertexSrc, fragmentSrc));
+    }
+
+    void OnUpdate(Timestep &ts) override {
+
+        if (Input::IsKeyPressed(GE_KEY_LEFT))
+            m_CameraPosition.x -= m_CameraMoveSpeed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_RIGHT))
+            m_CameraPosition.x += m_CameraMoveSpeed * ts;
+
+        if (Input::IsKeyPressed(GE_KEY_UP))
+            m_CameraPosition.y += m_CameraMoveSpeed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_DOWN))
+            m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+
+        if (Input::IsKeyPressed(GE_KEY_A))
+            position.x -= speed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_D))
+            position.x += speed * ts;
+
+        if (Input::IsKeyPressed(GE_KEY_W))
+            position.y += speed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_S))
+            position.y -= speed * ts;
+
+        if (Input::IsKeyPressed(GE_KEY_Q))
+            m_CameraRotation += m_CameraRotationSpeed * ts;
+        if (Input::IsKeyPressed(GE_KEY_E))
+            m_CameraRotation -= m_CameraRotationSpeed * ts;
+        m_Camera.SetPosition(m_CameraPosition);
+        m_Camera.SetRotation(m_CameraRotation);
+
+        glm::mat4 transform = glm::translate(glm::mat4(1.0), position);
+
+        RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.1});
+        RenderCommand::Clear();
+
+        glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.3));
+        Renderer::BeginScene(m_Camera);
+
+        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->Bind();
+        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color",
+                                                                               m_SquareColor);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+
+                glm::mat4 transform1 =
+                    transform * glm::translate(glm::mat4(1), glm::vec3(i * 0.4, j * 0.4, 0)) *
+                    scale;
+
+                Renderer::Submit(m_Shader, m_VertexArray, transform1);
+            }
+        }
+
+        Renderer::EndScene();
     }
 
     virtual void OnImGuiRender() override {
-        ImGui::Begin("Test");
-        ImGui::Text("Hello World");
+        ImGui::Begin("Settings");
+        ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
         ImGui::End();
     }
 
-    void OnEvent(GE::Event &event) override {
-        // if (event.GetEventType() == GE::EventType::KeyPressed) {
-        //     GE::KeyPressedEvent &e = (GE::KeyPressedEvent &)event;
-        //     if (e.GetKeyCode() == GE_KEY_TAB)
-        //         GE_TRACE("Tab key is pressed (event)!");
-        //     GE_TRACE("{0}", (char)e.GetKeyCode());
-        // }
-    }
+    void OnEvent(Event &event) override {}
+
+  private:
+    std::shared_ptr<Shader> m_Shader;
+    std::shared_ptr<VertexArray> m_VertexArray;
+    OrthographicCamera m_Camera;
+
+    glm::vec3 position = {0, 0, 0};
+    float speed = 5.0f;
+
+    glm::vec3 m_CameraPosition = {0, 0, 0};
+    float m_CameraMoveSpeed = 6.0f;
+
+    float m_CameraRotation = 0.0f;
+    float m_CameraRotationSpeed = 180.0f;
+
+    glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0};
 };
 
-class Sandbox : public GE::Application {
+class Sandbox : public Application {
   public:
     Sandbox() {
         PushOverlay(new ExampleLayer());
@@ -47,4 +164,5 @@ class Sandbox : public GE::Application {
     ~Sandbox() {}
 };
 
-GE::Application *GE::CreateApplication() { return new Sandbox(); }
+Application *CreateApplication() { return new Sandbox(); }
+} // namespace GE

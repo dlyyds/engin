@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Core.h"
+#include "Core/Timestep.h"
 #include "Event/Event.h"
+
 
 namespace GE {
 
@@ -12,7 +14,7 @@ class GE_API Layer {
 
     virtual void OnAttach() {}
     virtual void OnDetach() {}
-    virtual void OnUpdate() {}
+    virtual void OnUpdate(Timestep &ts) {}
     virtual void OnEvent(Event &event) {}
     virtual void OnImGuiRender() {}
     inline const std::string &GetName() const { return m_DebugName; }

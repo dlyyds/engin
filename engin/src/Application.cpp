@@ -5,6 +5,7 @@
 #include "GEWindow.h"
 #include "Log.h"
 
+#include "Core/Timestep.h"
 #include "KeyCodes.h"
 #include "MouseButtonCodes.h"
 
@@ -24,7 +25,7 @@ namespace GE {
 
 Application *Application::s_Instance = nullptr;
 
-Application::Application() : m_Camera(-1.6, 1.6, -0.9, 0.9) {
+Application::Application() {
 
     GE_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
@@ -34,76 +35,18 @@ Application::Application() : m_Camera(-1.6, 1.6, -0.9, 0.9) {
 
     m_ImGuiLayer = new ImGuiLayer();
     PushOverlay(m_ImGuiLayer);
-
-    m_VertexArray.reset(VertexArray::Create());
-
-    float vertices[4 * 7] = {
-        -0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f, // 0 左下角
-        0.5f,  -0.5f, 0.0f, 0.2f, 0.3f, 0.8f, 1.0f, // 1 右下角
-        0.5f,  0.5f,  0.0f, 0.8f, 0.8f, 0.2f, 1.0f, // 2 右上角
-        -0.5f, 0.5f,  0.0f, 1.0f, 0.4f, 0.4f, 1.0f  // 3 左上角
-    };
-    std::shared_ptr<VertexBuffer> vertexBuffer;
-    vertexBuffer = std::shared_ptr<VertexBuffer>(VertexBuffer::Create(vertices, sizeof(vertices)));
-    BufferLayout layout = {
-        {ShaderDataType::Float3, "a_Position"},
-        {ShaderDataType::Float4, "a_Color"   }
-    };
-    vertexBuffer->SetLayout(layout);
-    m_VertexArray->AddVertexBuffer(vertexBuffer);
-
-    std::shared_ptr<IndexBuffer> indexBuffer;
-    uint32_t indices[6] = {0, 1, 2, 0, 2, 3};
-    indexBuffer = std::shared_ptr<IndexBuffer>(
-        IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
-    m_VertexArray->SetIndexBuffer(indexBuffer);
-
-    std::string vertexSrc = R"(
-    #version 330 core
-    layout(location = 0)in vec3 a_Position;
-    layout(location = 1)in vec4 a_Color;
-
-    uniform mat4 u_ViewProjection;
-
-    out vec3 v_Position;
-    out vec4 v_Color;
-    void main(){
-      v_Position = a_Position;
-      v_Color = a_Color;
-      gl_Position = u_ViewProjection * vec4( a_Position,1.0);
-    }
-  
-  )";
-    std::string fragmentSrc = R"(
-    #version 330 core
-    layout(location = 0)out vec4 color;
-    in vec3 v_Position;
-    in vec4 v_Color;
-    void main(){
-      color =v_Color;
-    }
-    
-  )";
-    m_Shader = std::make_unique<Shader>(vertexSrc, fragmentSrc);
 }
 Application::~Application() {}
 void Application::Run() {
 
     while (m_Running) {
 
-        RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 0.1});
-        RenderCommand::Clear();
-
-        Renderer::BeginScene(m_Camera);
-
-        m_Camera.SetRotation(m_Camera.GetRotation() + 0.1);
-
-        Renderer::Submit(m_Shader, m_VertexArray);
-
-        Renderer::EndScene();
+        float time = (float)glfwGetTime();
+        Timestep timestep = time - m_LastFrameTime;
+        m_LastFrameTime = time;
 
         for (Layer *layer : m_LayerStack)
-            layer->OnUpdate();
+            layer->OnUpdate(timestep);
 
         m_ImGuiLayer->Begin();
         for (Layer *layer : m_LayerStack)
@@ -118,11 +61,6 @@ void Application::OnEvent(Event &e) {
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<WindowCloseEvent>(
         std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
-    //  GE_CORE_TRACE("Application::OnEvent {0}", e);
-
-    // if (Input::IsKeyPressed(GE_KEY_TAB)) {
-    //     GE_CORE_TRACE("Tab pressed");
-    // }
 
     for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
         (*--it)->OnEvent(e);

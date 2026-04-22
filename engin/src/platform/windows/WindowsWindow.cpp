@@ -43,7 +43,8 @@ void WindowsWindow::Init(const WindowProps &props) {
         s_GLFWInitialized = true;
     }
 
-    m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+    m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr,
+                                nullptr);
     // glfwMakeContextCurrent(m_Window);
     // int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     // GE_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -55,6 +56,7 @@ void WindowsWindow::Init(const WindowProps &props) {
 
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+        glViewport(0, 0, width, height);
         data.Width = width;
         data.Height = height;
         WindowResizeEvent event(width, height);
@@ -66,27 +68,28 @@ void WindowsWindow::Init(const WindowProps &props) {
         data.EventCallback(event);
     });
 
-    glfwSetKeyCallback(m_Window, [](GLFWwindow *window, int key, int scancode, int action, int mods) {
-        WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
+    glfwSetKeyCallback(m_Window,
+                       [](GLFWwindow *window, int key, int scancode, int action, int mods) {
+                           WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
 
-        switch (action) {
-        case GLFW_PRESS: {
-            KeyPressedEvent event(key, 0);
-            data.EventCallback(event);
-            break;
-        }
-        case GLFW_RELEASE: {
-            KeyReleasedEvent event(key);
-            data.EventCallback(event);
-            break;
-        }
-        case GLFW_REPEAT: {
-            KeyPressedEvent event(key, 1);
-            data.EventCallback(event);
-            break;
-        }
-        }
-    });
+                           switch (action) {
+                           case GLFW_PRESS: {
+                               KeyPressedEvent event(key, 0);
+                               data.EventCallback(event);
+                               break;
+                           }
+                           case GLFW_RELEASE: {
+                               KeyReleasedEvent event(key);
+                               data.EventCallback(event);
+                               break;
+                           }
+                           case GLFW_REPEAT: {
+                               KeyPressedEvent event(key, 1);
+                               data.EventCallback(event);
+                               break;
+                           }
+                           }
+                       });
 
     glfwSetCharCallback(m_Window, [](GLFWwindow *window, unsigned int keycode) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
