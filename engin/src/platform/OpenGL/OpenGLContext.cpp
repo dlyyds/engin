@@ -25,9 +25,6 @@ void OpenGLContext::Init() {
     GE_CORE_INFO("OpenGL Vendor:{0}", (const char *)glGetString(GL_VENDOR));
     GE_CORE_INFO("OpenGL Renderer:{0} ", (const char *)glGetString(GL_RENDERER));
     GE_CORE_INFO("OpenGL Version:{0} ", (const char *)glGetString(GL_VERSION));
-
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 };
 
 void OpenGLContext::SwapBuffers() { glfwSwapBuffers(m_WindowHandle); };

@@ -1,10 +1,12 @@
 #pragma once
 
 #include <algorithm>
+#include <fstream>
 #include <functional>
 #include <iostream>
 #include <memory>
 #include <utility>
+
 
 #include <sstream>
 #include <string>
@@ -20,5 +22,5 @@
 #include "glad/glad.h"
 
 #ifdef GE_PLATFORM_WINDOWS
-#include <Windows.h>
+#    include <Windows.h>
 #endif

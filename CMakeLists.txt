@@ -33,6 +33,7 @@ file(GLOB ENGINE_SRC
     ${CMAKE_SOURCE_DIR}/engin/src/Platform/OpenGL/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/ImGui/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/src/Renderer/*.cpp
+    ${CMAKE_SOURCE_DIR}/engin/vendor/stbimage/*.cpp
     ${CMAKE_SOURCE_DIR}/engin/include/GE/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/Event/*.h
     ${CMAKE_SOURCE_DIR}/engin/include/GE/ImGui/*.h
@@ -47,11 +48,13 @@ add_library(${ENGINE_NAME} STATIC ${ENGINE_SRC})
 target_include_directories(${ENGINE_NAME} PUBLIC 
 ${CMAKE_SOURCE_DIR}/engin/include/GE
 ${CMAKE_SOURCE_DIR}/engin/vendor/glm
+${CMAKE_SOURCE_DIR}/engin/vendor/stbimage
 )
 target_compile_definitions(${ENGINE_NAME} PRIVATE 
 GAME_ENGINE_BUILD 
 GLFW_INCLUDE_NONE
 GE_PLATFORM_WINDOWS
+GE_ENABLE_ASSERTS
 )
 target_link_libraries(${ENGINE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
 

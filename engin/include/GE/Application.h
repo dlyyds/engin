@@ -35,7 +35,7 @@ class GE_API Application {
     bool m_Running = true;
     bool OnWindowClose(WindowCloseEvent &e);
     LayerStack m_LayerStack;
-    std::unique_ptr<Window> m_Window;
+    Scope<Window> m_Window;
     static Application *s_Instance;
     float m_LastFrameTime = 0.0f;
 };

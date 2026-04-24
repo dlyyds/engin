@@ -30,9 +30,10 @@ Application::Application() {
     GE_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
     //  WindowProps p("title", 1000, 700);
-    m_Window = std::unique_ptr<Window>(Window::Create());
+    m_Window = Scope<Window>(Window::Create());
     m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
 
+    Renderer::Init();
     m_ImGuiLayer = new ImGuiLayer();
     PushOverlay(m_ImGuiLayer);
 }
