@@ -67,7 +67,7 @@ class ExampleLayer : public Layer {
     }
     
   )";
-            m_Shader = Shader::Create(vertexSrc, fragmentSrc);
+            m_ShaderLibrary.Load("m_Shader", vertexSrc, fragmentSrc);
         }
 
         {
@@ -93,12 +93,14 @@ class ExampleLayer : public Layer {
                 Ref<IndexBuffer>(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
             m_SquareVa->SetIndexBuffer(indexBuffer);
 
-            m_TextureShader = Shader::Create("assets/shaders/TextureShader.glsl");
-
+            // Shader::Create("assets/shaders/TextureShader.glsl");
+            m_ShaderLibrary.Load("assets/shaders/TextureShader.glsl");
             m_Texture = Texture2D::Create("assets/textures/Checkerboard.png");
             m_LogoTexture = Texture2D::Create("assets/textures/ChernoLogo.png");
-            std::dynamic_pointer_cast<OpenGLShader>(m_TextureShader)->Bind();
-            std::dynamic_pointer_cast<OpenGLShader>(m_TextureShader)
+
+            auto textureShader = m_ShaderLibrary.Get("TextureShader");
+            std::dynamic_pointer_cast<OpenGLShader>(textureShader)->Bind();
+            std::dynamic_pointer_cast<OpenGLShader>(textureShader)
                 ->UploadUniformInt("u_Texture", 0);
         }
     }
@@ -141,22 +143,26 @@ class ExampleLayer : public Layer {
         glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.3));
         Renderer::BeginScene(m_Camera);
 
-        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->Bind();
-        std::dynamic_pointer_cast<OpenGLShader>(m_Shader)->UploadUniformFloat4("u_Color",
-                                                                               m_SquareColor);
+        auto shader = m_ShaderLibrary.Get("m_Shader");
+
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->Bind();
+        std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformFloat4("u_Color",
+                                                                             m_SquareColor);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 glm::mat4 transform1 =
                     transform * glm::translate(glm::mat4(1), glm::vec3(i * 0.4, j * 0.4, 0)) *
                     scale;
-                Renderer::Submit(m_Shader, m_VertexArray, transform1);
+                Renderer::Submit(shader, m_VertexArray, transform1);
             }
         }
-        std::dynamic_pointer_cast<OpenGLShader>(m_TextureShader)->Bind();
+
+        auto textureShader = m_ShaderLibrary.Get("TextureShader");
+        std::dynamic_pointer_cast<OpenGLShader>(textureShader)->Bind();
         m_Texture->Bind();
-        Renderer::Submit(m_TextureShader, m_SquareVa);
+        Renderer::Submit(textureShader, m_SquareVa);
         m_LogoTexture->Bind();
-        Renderer::Submit(m_TextureShader, m_SquareVa);
+        Renderer::Submit(textureShader, m_SquareVa);
         Renderer::EndScene();
     }
 
@@ -169,10 +175,10 @@ class ExampleLayer : public Layer {
     void OnEvent(Event &event) override {}
 
   private:
-    Ref<Shader> m_Shader;
     Ref<VertexArray> m_VertexArray;
 
-    Ref<Shader> m_TextureShader;
+    ShaderLibrary m_ShaderLibrary;
+
     Ref<VertexArray> m_SquareVa;
 
     Ref<Texture2D> m_Texture;
