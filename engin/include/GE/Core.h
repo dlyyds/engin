@@ -1,5 +1,7 @@
 #pragma once
 
+#include "memory"
+
 #ifdef _WIN64
 
 #    ifdef GE_DYNAMIC_LINK
@@ -18,19 +20,19 @@
 #define BIT(x) (1 << x)
 
 #ifdef GE_ENABLE_ASSERTS
-#    define GE_ASSERT(x, ...)                                                                                          \
-        {                                                                                                              \
-            if (!(x)) {                                                                                                \
-                HZ_ERROR("Assertion Failed: {0}", __VA_ARGS__);                                                        \
-                __debugbreak();                                                                                        \
-            }                                                                                                          \
+#    define GE_ASSERT(x, ...)                                                                      \
+        {                                                                                          \
+            if (!(x)) {                                                                            \
+                GE_ERROR("Assertion Failed: {0}", __VA_ARGS__);                                    \
+                asm("int $3");                                                                     \
+            }                                                                                      \
         }
-#    define GE_CORE_ASSERT(x, ...)                                                                                     \
-        {                                                                                                              \
-            if (!(x)) {                                                                                                \
-                HZ_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__);                                                   \
-                __debugbreak();                                                                                        \
-            }                                                                                                          \
+#    define GE_CORE_ASSERT(x, ...)                                                                 \
+        {                                                                                          \
+            if (!(x)) {                                                                            \
+                GE_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__);                               \
+                asm("int $3");                                                                     \
+            }                                                                                      \
         }
 #else
 #    define GE_ASSERT(x, ...)
@@ -38,3 +40,11 @@
 #endif
 
 #define GE_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace GE {
+
+template <typename T> using Scope = std::unique_ptr<T>;
+
+template <typename T> using Ref = std::shared_ptr<T>;
+
+} // namespace GE
