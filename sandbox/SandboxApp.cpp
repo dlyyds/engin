@@ -18,7 +18,7 @@ namespace GE {
 
 class ExampleLayer : public Layer {
   public:
-    ExampleLayer() : Layer("Example"), m_Camera(-1.6, 1.6, -0.9, 0.9) {
+    ExampleLayer() : Layer("Example"), m_CameraController(1280.0f / 720.0f) {
         {
             m_VertexArray = VertexArray::Create();
             float vertices[4 * 7] = {
@@ -106,34 +106,17 @@ class ExampleLayer : public Layer {
     }
 
     void OnUpdate(Timestep &ts) override {
-        {
-            if (Input::IsKeyPressed(GE_KEY_LEFT))
-                m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-            else if (Input::IsKeyPressed(GE_KEY_RIGHT))
-                m_CameraPosition.x += m_CameraMoveSpeed * ts;
+        if (Input::IsKeyPressed(GE_KEY_A))
+            position.x -= speed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_D))
+            position.x += speed * ts;
 
-            if (Input::IsKeyPressed(GE_KEY_UP))
-                m_CameraPosition.y += m_CameraMoveSpeed * ts;
-            else if (Input::IsKeyPressed(GE_KEY_DOWN))
-                m_CameraPosition.y -= m_CameraMoveSpeed * ts;
+        if (Input::IsKeyPressed(GE_KEY_W))
+            position.y += speed * ts;
+        else if (Input::IsKeyPressed(GE_KEY_S))
+            position.y -= speed * ts;
 
-            if (Input::IsKeyPressed(GE_KEY_A))
-                position.x -= speed * ts;
-            else if (Input::IsKeyPressed(GE_KEY_D))
-                position.x += speed * ts;
-
-            if (Input::IsKeyPressed(GE_KEY_W))
-                position.y += speed * ts;
-            else if (Input::IsKeyPressed(GE_KEY_S))
-                position.y -= speed * ts;
-
-            if (Input::IsKeyPressed(GE_KEY_Q))
-                m_CameraRotation += m_CameraRotationSpeed * ts;
-            if (Input::IsKeyPressed(GE_KEY_E))
-                m_CameraRotation -= m_CameraRotationSpeed * ts;
-            m_Camera.SetPosition(m_CameraPosition);
-            m_Camera.SetRotation(m_CameraRotation);
-        }
+        m_CameraController.OnUpdate(ts);
 
         glm::mat4 transform = glm::translate(glm::mat4(1.0), position);
 
@@ -141,7 +124,7 @@ class ExampleLayer : public Layer {
         RenderCommand::Clear();
 
         glm::mat4 scale = glm::scale(glm::mat4(1), glm::vec3(0.3));
-        Renderer::BeginScene(m_Camera);
+        Renderer::BeginScene(m_CameraController.GetCamera());
 
         auto shader = m_ShaderLibrary.Get("m_Shader");
 
@@ -172,7 +155,7 @@ class ExampleLayer : public Layer {
         ImGui::End();
     }
 
-    void OnEvent(Event &event) override {}
+    void OnEvent(Event &event) override { m_CameraController.OnEvent(event); }
 
   private:
     Ref<VertexArray> m_VertexArray;
@@ -184,16 +167,10 @@ class ExampleLayer : public Layer {
     Ref<Texture2D> m_Texture;
     Ref<Texture2D> m_LogoTexture;
 
-    OrthographicCamera m_Camera;
-
     glm::vec3 position = {0, 0, 0};
     float speed = 5.0f;
 
-    glm::vec3 m_CameraPosition = {0, 0, 0};
-    float m_CameraMoveSpeed = 6.0f;
-
-    float m_CameraRotation = 0.0f;
-    float m_CameraRotationSpeed = 180.0f;
+    OrthographicCameraController m_CameraController;
 
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0};
 };

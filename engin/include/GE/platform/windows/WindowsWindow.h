@@ -14,12 +14,14 @@ class WindowsWindow : public Window {
 
     void OnUpdate() override;
 
-    inline unsigned int GetWidth() const override { return m_Data.Width; }
-    inline unsigned int GetHeight() const override { return m_Data.Height; }
+    inline uint32_t GetWidth() const override { return m_Data.Width; }
+    inline uint32_t GetHeight() const override { return m_Data.Height; }
 
     inline virtual void *GetNativeWindow() const override { return m_Window; }
     // Window attributes
-    inline void SetEventCallback(const EventCallbackFn &callback) override { m_Data.EventCallback = callback; }
+    inline void SetEventCallback(const EventCallbackFn &callback) override {
+        m_Data.EventCallback = callback;
+    }
     void SetVSync(bool enabled) override;
     bool IsVSync() const override;
 
@@ -33,7 +35,7 @@ class WindowsWindow : public Window {
 
     struct WindowData {
         std::string Title;
-        unsigned int Width, Height;
+        uint32_t Width, Height;
         bool VSync;
 
         EventCallbackFn EventCallback;

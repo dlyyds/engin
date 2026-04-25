@@ -30,14 +30,20 @@ class GE_API Application {
     inline static Application &Get() { return *s_Instance; }
 
   private:
+    bool OnWindowClose(WindowCloseEvent &e);
+    bool OnWindowResized(WindowResizeEvent &e);
+
+  private:
     ImGuiLayer *m_ImGuiLayer;
 
     bool m_Running = true;
-    bool OnWindowClose(WindowCloseEvent &e);
+
     LayerStack m_LayerStack;
     Scope<Window> m_Window;
     static Application *s_Instance;
     float m_LastFrameTime = 0.0f;
+
+    bool m_Minimized = false;
 };
 
 Application *CreateApplication();

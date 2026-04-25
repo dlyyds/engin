@@ -56,12 +56,12 @@ void WindowsWindow::Init(const WindowProps &props) {
 
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
-        glViewport(0, 0, width, height);
         data.Width = width;
         data.Height = height;
         WindowResizeEvent event(width, height);
         data.EventCallback(event);
     });
+
     glfwSetWindowCloseCallback(m_Window, [](GLFWwindow *window) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
         WindowCloseEvent event;
@@ -91,7 +91,7 @@ void WindowsWindow::Init(const WindowProps &props) {
                            }
                        });
 
-    glfwSetCharCallback(m_Window, [](GLFWwindow *window, unsigned int keycode) {
+    glfwSetCharCallback(m_Window, [](GLFWwindow *window, uint32_t keycode) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
 
         KeyTypedEvent event(keycode);

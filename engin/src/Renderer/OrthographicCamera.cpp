@@ -10,6 +10,11 @@ OrthographicCamera::OrthographicCamera(float left, float right, float bottom, fl
     m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 }
 
+void OrthographicCamera::SetProjection(float left, float right, float bottom, float top) {
+    m_ProjectionMatrix = glm::ortho(left, right, bottom, top);
+    m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
+}
+
 void OrthographicCamera::RecalculateViewMatrix() {
 
     float radians = glm::radians(m_Rotation);
