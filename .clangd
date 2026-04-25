@@ -2,8 +2,8 @@
 CompileFlags:
   CompilationDatabase: "bin-int"
   Add:
-    - -If:/yxy/GameEngine/engin/include 
-    - -If:/yxy/GameEngine/engin/vendor/spdlog/include
+    - -If:/yxy/GameEngine/GE/include 
+    - -If:/yxy/GameEngine/GE/vendor/spdlog/include
 
 
 Diagnostics:
