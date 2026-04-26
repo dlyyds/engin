@@ -96,8 +96,10 @@ void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string> &shader
         return;
     }
     m_RendererID = program;
-    for (auto shader : glShaderIDs)
+    for (auto shader : glShaderIDs) {
         glDetachShader(program, shader);
+        glDeleteShader(shader);
+    }
 }
 
 std::string OpenGLShader::ReadFile(const std::string &filepath) {
