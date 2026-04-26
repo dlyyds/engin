@@ -1,7 +1,6 @@
 #pragma once
 // Core
 #include "Core/Application.h"
-#include "Core/EntryPoint.h"
 #include "Core/GEInput.h"
 #include "Core/KeyCodes.h"
 #include "Core/LayerStack.h"

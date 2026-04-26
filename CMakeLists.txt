@@ -27,7 +27,7 @@ add_subdirectory(GE/vendor/glfw)
 add_subdirectory(GE/vendor/glad)
 add_subdirectory(GE/vendor/imgui)
 
-file(GLOB GEE_SRC
+file(GLOB GE_SRC
     ${CMAKE_SOURCE_DIR}/GE/src/*.cpp
     ${CMAKE_SOURCE_DIR}/GE/src/Platform/Windows/*.cpp
     ${CMAKE_SOURCE_DIR}/GE/src/Platform/OpenGL/*.cpp
@@ -38,16 +38,14 @@ file(GLOB GEE_SRC
 )
 
 
-add_library(${GE_NAME} STATIC ${GEE_SRC})
+add_library(${GE_NAME} STATIC ${GE_SRC})
 target_include_directories(${GE_NAME} PUBLIC 
 ${CMAKE_SOURCE_DIR}/GE/include/GE
 ${CMAKE_SOURCE_DIR}/GE/vendor/glm
 ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
 )
 target_compile_definitions(${GE_NAME} PRIVATE 
-GAME_GEE_BUILD 
 GLFW_INCLUDE_NONE
-GE_PLATFORM_WINDOWS
 GE_ENABLE_ASSERTS
 )
 target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
@@ -64,7 +62,13 @@ target_precompile_headers(${GE_NAME} PRIVATE GE/include/GE/pch.h)
 
 #Sandbox EXE 调用 DLL
 # ==============================================
-add_executable(${APP_NAME} ${CMAKE_SOURCE_DIR}/sandbox/SandboxApp.cpp)
+
+file(GLOB APP_SRC
+   ${CMAKE_SOURCE_DIR}/sandbox/*.cpp
+)
+
+
+add_executable(${APP_NAME} ${APP_SRC})
 target_include_directories(${APP_NAME} PRIVATE 
 ${CMAKE_SOURCE_DIR}/GE/include
 ${CMAKE_SOURCE_DIR}/GE/vendor/glm
