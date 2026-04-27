@@ -21,5 +21,7 @@ class Sandbox2D : public GE::Layer {
     GE::Ref<GE::VertexArray> m_SquareVA;
     GE::Ref<GE::Shader> m_FlatColorShader;
 
+    GE::Ref<GE::Texture2D> m_CheckerboardTexture;
+    GE::Ref<GE::Texture2D> m_LogoTexture;
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
 };

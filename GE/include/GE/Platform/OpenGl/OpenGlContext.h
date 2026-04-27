@@ -7,7 +7,7 @@
 struct GLFWwindow;
 
 namespace GE {
-class GE_API OpenGLContext : public GraphicsContext {
+class OpenGLContext : public GraphicsContext {
   public:
     OpenGLContext(GLFWwindow *windowHandle);
     ~OpenGLContext();

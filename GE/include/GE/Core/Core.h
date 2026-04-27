@@ -42,22 +42,11 @@
 #    error "Unknown platform!"
 #endif // End of platform detection
 
-#ifdef _WIN64
-
-#    ifdef GE_DYNAMIC_LINK
-#        ifdef GAME_ENGINE_BUILD
-#            define GE_API __declspec(dllexport)
-#        else
-#            define GE_API __declspec(dllimport)
-#        endif
-#    else
-#        define GE_API
-#    endif
-#else
-#    error GE only support Windows!
-#endif
-
 #define BIT(x) (1 << x)
+
+#ifdef GE_DEBUG
+#    define GE_ENABLE_ASSERTS
+#endif
 
 #ifdef GE_ENABLE_ASSERTS
 #    define GE_ASSERT(x, ...)                                                                      \

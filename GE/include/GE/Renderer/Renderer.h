@@ -12,6 +12,8 @@ class Renderer {
     static void BeginScene(OrthographicCamera &camera);
     static void EndScene();
 
+    static void Shutdown();
+
     static void OnWindowResize(uint32_t width, uint32_t height);
 
     static void Submit(const Ref<Shader> &shader, const Ref<VertexArray> &vertexArray,

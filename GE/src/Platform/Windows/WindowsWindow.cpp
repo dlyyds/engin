@@ -13,11 +13,11 @@
 
 namespace GE {
 
-static bool s_GLFWInitialized = false;
+static uint8_t s_GLFWWindowCount = 0;
 
-Window *Window::Create(const WindowProps &props) {
+Scope<Window> Window::Create(const WindowProps &props) {
     // GE_CORE_TRACE("create window");
-    return new WindowsWindow(props);
+    return CreateScope<Window>(props);
 }
 
 WindowsWindow::WindowsWindow(const WindowProps &props) { Init(props); }
@@ -35,20 +35,20 @@ void WindowsWindow::Init(const WindowProps &props) {
 
     GE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-    if (!s_GLFWInitialized) {
+    if (s_GLFWWindowCount == 0) {
         // TODO: glfwTerminate on system shutdown
         int success = glfwInit();
         GE_CORE_ASSERT(success, "Could not intialize GLFW!");
+        GE_CORE_INFO("Initializing GLFW");
         glfwSetErrorCallback(GLFWErrorCallback);
-        s_GLFWInitialized = true;
     }
-
+    ++s_GLFWWindowCount;
     m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr,
                                 nullptr);
     // glfwMakeContextCurrent(m_Window);
     // int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     // GE_CORE_ASSERT(status, "Failed to initialize Glad!");
-    m_Context = CreateScope<OpenGLContext>(m_Window);
+    m_Context = GraphicsContext::Create(m_Window);
     m_Context->Init();
 
     glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -130,7 +130,13 @@ void WindowsWindow::Init(const WindowProps &props) {
     });
 }
 
-void WindowsWindow::Shutdown() { glfwDestroyWindow(m_Window); }
+void WindowsWindow::Shutdown() {
+    glfwDestroyWindow(m_Window);
+    if (--s_GLFWWindowCount == 0) {
+        GE_CORE_INFO("Terminating GLFW");
+        glfwTerminate();
+    }
+}
 
 void WindowsWindow::OnUpdate() {
     glfwPollEvents();

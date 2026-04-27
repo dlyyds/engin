@@ -16,7 +16,7 @@
 namespace GE {
 class Shader;
 
-class GE_API Application {
+class Application {
   public:
     Application();
     virtual ~Application();
@@ -38,8 +38,10 @@ class GE_API Application {
 
     bool m_Running = true;
 
-    LayerStack m_LayerStack;
     Scope<Window> m_Window;
+
+    LayerStack m_LayerStack;
+
     static Application *s_Instance;
     float m_LastFrameTime = 0.0f;
 
