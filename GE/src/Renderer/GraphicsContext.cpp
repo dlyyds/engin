@@ -1,8 +1,9 @@
-#include "GE/Renderer/GraphicsContext.h"
 #include "pch.h"
 
-#include "GE/Renderer/Renderer.h"
 #include "Platform/OpenGL/OpenGLContext.h"
+#include "Renderer/GraphicsContext.h"
+#include "Renderer/Renderer.h"
+
 
 namespace GE {
 

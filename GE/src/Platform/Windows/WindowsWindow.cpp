@@ -17,7 +17,7 @@ static uint8_t s_GLFWWindowCount = 0;
 
 Scope<Window> Window::Create(const WindowProps &props) {
     // GE_CORE_TRACE("create window");
-    return CreateScope<Window>(props);
+    return CreateScope<WindowsWindow>(props);
 }
 
 WindowsWindow::WindowsWindow(const WindowProps &props) { Init(props); }
