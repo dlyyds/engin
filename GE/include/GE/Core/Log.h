@@ -7,7 +7,7 @@
 #include "spdlog/spdlog.h"
 
 namespace GE {
-class GE_API Log {
+class Log {
   public:
     static void Init();
     inline static Ref<spdlog::logger> &GetCoreLogger() { return s_CoreLogger; }

@@ -6,7 +6,7 @@
 
 namespace GE {
 
-class GE_API WindowResizeEvent : public Event {
+class WindowResizeEvent : public Event {
   public:
     WindowResizeEvent(uint32_t width, uint32_t height) : m_Width(width), m_Height(height) {}
 
@@ -25,7 +25,7 @@ class GE_API WindowResizeEvent : public Event {
     uint32_t m_Width, m_Height;
 };
 
-class GE_API WindowCloseEvent : public Event {
+class WindowCloseEvent : public Event {
   public:
     WindowCloseEvent() {}
 
@@ -33,7 +33,7 @@ class GE_API WindowCloseEvent : public Event {
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-class GE_API AppTickEvent : public Event {
+class AppTickEvent : public Event {
   public:
     AppTickEvent() {}
 
@@ -41,7 +41,7 @@ class GE_API AppTickEvent : public Event {
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-class GE_API AppUpdateEvent : public Event {
+class AppUpdateEvent : public Event {
   public:
     AppUpdateEvent() {}
 
@@ -49,7 +49,7 @@ class GE_API AppUpdateEvent : public Event {
     EVENT_CLASS_CATEGORY(EventCategoryApplication)
 };
 
-class GE_API AppRenderEvent : public Event {
+class AppRenderEvent : public Event {
   public:
     AppRenderEvent() {}
 

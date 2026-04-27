@@ -9,7 +9,6 @@
 #include "Core/MouseButtonCodes.h"
 #include "Core/Timestep.h"
 
-
 #include <Event/ApplicationEvent.h>
 
 #include <GLFW/glfw3.h>
@@ -31,14 +30,14 @@ Application::Application() {
     GE_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
     //  WindowProps p("title", 1000, 700);
-    m_Window = Scope<Window>(Window::Create());
-    m_Window->SetEventCallback(std::bind(&Application::OnEvent, this, std::placeholders::_1));
+    m_Window = Window::Create();
+    m_Window->SetEventCallback(GE_BIND_EVENT_FN(Application::OnEvent));
 
     Renderer::Init();
     m_ImGuiLayer = new ImGuiLayer();
     PushOverlay(m_ImGuiLayer);
 }
-Application::~Application() {}
+Application::~Application() { Renderer::Shutdown(); }
 void Application::Run() {
 
     while (m_Running) {

@@ -50,6 +50,7 @@ void ImGuiLayer::OnAttach() {
 }
 
 void ImGuiLayer::OnDetach() {
+    GE_CORE_INFO("ImGui Shutdown");
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
@@ -77,9 +78,6 @@ void ImGuiLayer::End() {
     }
 }
 
-void ImGuiLayer::OnImGuiRender() {
-    static bool show = true;
-    ImGui::ShowDemoWindow(&show);
-}
+void ImGuiLayer::OnImGuiRender() {}
 
 } // namespace GE
