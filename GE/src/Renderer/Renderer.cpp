@@ -22,13 +22,18 @@ void Renderer::Submit(const Ref<Shader> &shader, const Ref<VertexArray> &vertexA
     RenderCommand::DrawIndexed(vertexArray);
 }
 void Renderer::Init() {
+    GE_PROFILE_FUNCTION();
     RenderCommand::Init();
     Renderer2D::Init();
 }
 
-void Renderer::Shutdown() { Renderer2D::Shutdown(); }
+void Renderer::Shutdown() {
+    GE_PROFILE_FUNCTION();
+    Renderer2D::Shutdown();
+}
 
 void Renderer::OnWindowResize(uint32_t width, uint32_t height) {
+    GE_PROFILE_FUNCTION();
     RenderCommand::SetViewport(0, 0, width, height);
 }
 

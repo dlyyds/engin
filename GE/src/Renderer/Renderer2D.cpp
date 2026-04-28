@@ -18,6 +18,7 @@ struct Renderer2DStorage {
 static Renderer2DStorage *s_Data;
 
 void Renderer2D::Init() {
+    GE_PROFILE_FUNCTION();
     s_Data = new Renderer2DStorage();
     s_Data->QuadVertexArray = VertexArray::Create();
     // clang-format off
@@ -49,15 +50,18 @@ void Renderer2D::Init() {
     s_Data->WhiteTexture->SetData(&white, sizeof(white));
 }
 
-void Renderer2D::Shutdown() { delete s_Data; }
+void Renderer2D::Shutdown() {
+    GE_PROFILE_FUNCTION();
+    delete s_Data;
+}
 
 void Renderer2D::BeginScene(const OrthographicCamera &camera) {
-
+    GE_PROFILE_FUNCTION();
     s_Data->TextureShader->Bind();
     s_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 }
 
-void Renderer2D::EndScene() {}
+void Renderer2D::EndScene() { GE_PROFILE_FUNCTION(); }
 
 void Renderer2D::DrawQuad(const glm::vec2 &position, const glm::vec2 &size,
                           const glm::vec4 &color) {
@@ -66,7 +70,7 @@ void Renderer2D::DrawQuad(const glm::vec2 &position, const glm::vec2 &size,
 
 void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size,
                           const glm::vec4 &color) {
-
+    GE_PROFILE_FUNCTION();
     s_Data->TextureShader->SetFloat4("u_Color", color);
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *
@@ -86,6 +90,7 @@ void Renderer2D::DrawQuad(const glm::vec2 &position, const glm::vec2 &size,
 
 void Renderer2D::DrawQuad(const glm::vec3 &position, const glm::vec2 &size,
                           const Ref<Texture2D> &texture) {
+    GE_PROFILE_FUNCTION();
     s_Data->TextureShader->Bind();
 
     glm::mat4 transform = glm::translate(glm::mat4(1.0f), position) *

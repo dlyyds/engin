@@ -47,6 +47,7 @@ ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
 target_compile_definitions(${GE_NAME} PRIVATE 
 GLFW_INCLUDE_NONE
 GE_DEBUG
+NOMINMAX
 )
 target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
 

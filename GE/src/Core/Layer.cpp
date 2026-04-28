@@ -3,7 +3,7 @@
 
 namespace GE {
 
-Layer::Layer(const std::string &debugName) : m_DebugName(debugName) {}
+Layer::Layer(const std::string &debugName) : m_DebugName(debugName) { GE_PROFILE_FUNCTION(); }
 
 Layer::~Layer() {}
 

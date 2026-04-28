@@ -6,7 +6,7 @@
 #include "Core/Log.h"
 
 #include "Core/KeyCodes.h"
-#include "Core/MouseButtonCodes.h"
+#include "Core/MouseCodes.h"
 #include "Core/Timestep.h"
 
 #include <Event/ApplicationEvent.h>
@@ -27,6 +27,8 @@ Application *Application::s_Instance = nullptr;
 
 Application::Application() {
 
+    GE_PROFILE_FUNCTION();
+
     GE_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
     //  WindowProps p("title", 1000, 700);
@@ -34,11 +36,16 @@ Application::Application() {
     m_Window->SetEventCallback(GE_BIND_EVENT_FN(Application::OnEvent));
 
     Renderer::Init();
+
     m_ImGuiLayer = new ImGuiLayer();
     PushOverlay(m_ImGuiLayer);
 }
-Application::~Application() { Renderer::Shutdown(); }
+Application::~Application() {
+    GE_PROFILE_FUNCTION();
+    Renderer::Shutdown();
+}
 void Application::Run() {
+    GE_PROFILE_FUNCTION();
 
     while (m_Running) {
 
@@ -61,14 +68,13 @@ void Application::Run() {
 }
 
 void Application::OnEvent(Event &e) {
+    GE_PROFILE_FUNCTION();
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<WindowCloseEvent>(GE_BIND_EVENT_FN(Application::OnWindowClose));
     dispatcher.Dispatch<WindowResizeEvent>(GE_BIND_EVENT_FN(Application::OnWindowResized));
 
-    for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();) {
-        (*--it)->OnEvent(e);
-        if (e.Handled)
-            break;
+    for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
+        (*it)->OnEvent(e);
     }
 }
 bool Application::OnWindowResized(WindowResizeEvent &e) {
@@ -88,11 +94,13 @@ bool Application::OnWindowClose(WindowCloseEvent &e) {
 }
 
 void Application::PushLayer(Layer *layer) {
+    GE_PROFILE_FUNCTION();
     m_LayerStack.PushLayer(layer);
     layer->OnAttach();
 }
 
 void Application::PushOverlay(Layer *layer) {
+    GE_PROFILE_FUNCTION();
     m_LayerStack.PushOverlay(layer);
     layer->OnAttach();
 }

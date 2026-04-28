@@ -3,7 +3,11 @@
 
 namespace GE {
 
-LayerStack::LayerStack() { m_LayerInsertIndex = 0; }
+LayerStack::LayerStack() {
+    GE_PROFILE_FUNCTION();
+
+    m_LayerInsertIndex = 0;
+}
 
 LayerStack::~LayerStack() {
     for (Layer *layer : m_Layers) {
