@@ -1,7 +1,7 @@
 #pragma once
 
+#include "Core/GEInput.h"
 #include "Event.h"
-
 #include <sstream>
 
 namespace GE {
@@ -46,18 +46,18 @@ class MouseScrolledEvent : public Event {
 
 class MouseButtonEvent : public Event {
   public:
-    inline int GetMouseButton() const { return m_Button; }
+    inline MouseCode GetMouseButton() const { return m_Button; }
 
     EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
   protected:
-    MouseButtonEvent(int button) : m_Button(button) {}
+    MouseButtonEvent(MouseCode button) : m_Button(button) {}
 
-    int m_Button;
+    MouseCode m_Button;
 };
 
 class MouseButtonPressedEvent : public MouseButtonEvent {
   public:
-    MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonPressedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
     std::string ToString() const override {
         std::stringstream ss;
@@ -70,7 +70,7 @@ class MouseButtonPressedEvent : public MouseButtonEvent {
 
 class MouseButtonReleasedEvent : public MouseButtonEvent {
   public:
-    MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
+    MouseButtonReleasedEvent(MouseCode button) : MouseButtonEvent(button) {}
 
     std::string ToString() const override {
         std::stringstream ss;

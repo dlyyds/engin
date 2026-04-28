@@ -11,16 +11,17 @@
 
 #include "GLFW/glfw3.h"
 
+#include "Core/GEInput.h"
+#include "Renderer/Renderer.h"
+
 namespace GE {
 
 static uint8_t s_GLFWWindowCount = 0;
 
-Scope<Window> Window::Create(const WindowProps &props) {
-    // GE_CORE_TRACE("create window");
-    return CreateScope<WindowsWindow>(props);
+WindowsWindow::WindowsWindow(const WindowProps &props) {
+    GE_PROFILE_FUNCTION();
+    Init(props);
 }
-
-WindowsWindow::WindowsWindow(const WindowProps &props) { Init(props); }
 
 WindowsWindow::~WindowsWindow() { Shutdown(); }
 
@@ -29,6 +30,7 @@ static void GLFWErrorCallback(int error, const char *description) {
 }
 
 void WindowsWindow::Init(const WindowProps &props) {
+    GE_PROFILE_FUNCTION();
     m_Data.Title = props.Title;
     m_Data.Width = props.Width;
     m_Data.Height = props.Height;
@@ -36,6 +38,7 @@ void WindowsWindow::Init(const WindowProps &props) {
     GE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
     if (s_GLFWWindowCount == 0) {
+        GE_PROFILE_SCOPE("glfwInit");
         // TODO: glfwTerminate on system shutdown
         int success = glfwInit();
         GE_CORE_ASSERT(success, "Could not intialize GLFW!");
@@ -43,14 +46,23 @@ void WindowsWindow::Init(const WindowProps &props) {
         glfwSetErrorCallback(GLFWErrorCallback);
     }
     ++s_GLFWWindowCount;
-    m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr,
-                                nullptr);
+    {
+        GE_PROFILE_SCOPE("glfwCreateWindow");
+#if defined(GE_DEBUG)
+        if (Renderer::GetAPI() == RendererAPI::API::OpenGL)
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
+        m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
+                                    nullptr, nullptr);
+    }
     // glfwMakeContextCurrent(m_Window);
     // int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
     // GE_CORE_ASSERT(status, "Failed to initialize Glad!");
-    m_Context = GraphicsContext::Create(m_Window);
-    m_Context->Init();
-
+    {
+        GE_PROFILE_SCOPE("GraphicsContext Init");
+        m_Context = GraphicsContext::Create(m_Window);
+        m_Context->Init();
+    }
     glfwSetWindowUserPointer(m_Window, &m_Data);
     SetVSync(true);
 
@@ -69,9 +81,9 @@ void WindowsWindow::Init(const WindowProps &props) {
     });
 
     glfwSetKeyCallback(m_Window,
-                       [](GLFWwindow *window, int key, int scancode, int action, int mods) {
+                       [](GLFWwindow *window, int keyCode, int scancode, int action, int mods) {
                            WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
-
+                           KeyCode key = static_cast<KeyCode>(keyCode);
                            switch (action) {
                            case GLFW_PRESS: {
                                KeyPressedEvent event(key, 0);
@@ -94,7 +106,7 @@ void WindowsWindow::Init(const WindowProps &props) {
     glfwSetCharCallback(m_Window, [](GLFWwindow *window, uint32_t keycode) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);
 
-        KeyTypedEvent event(keycode);
+        KeyTypedEvent event(static_cast<KeyCode>(keycode));
         data.EventCallback(event);
     });
 
@@ -103,12 +115,12 @@ void WindowsWindow::Init(const WindowProps &props) {
 
         switch (action) {
         case GLFW_PRESS: {
-            MouseButtonPressedEvent event(button);
+            MouseButtonPressedEvent event(static_cast<MouseCode>(button));
             data.EventCallback(event);
             break;
         }
         case GLFW_RELEASE: {
-            MouseButtonReleasedEvent event(button);
+            MouseButtonReleasedEvent event(static_cast<MouseCode>(button));
             data.EventCallback(event);
             break;
         }

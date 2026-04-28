@@ -7,9 +7,12 @@ namespace GE {
 OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
     : m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel,
                                            m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel),
-      m_Rotation(rotation) {}
+      m_Rotation(rotation) {
+    GE_PROFILE_FUNCTION();
+}
 
 void OrthographicCameraController::OnUpdate(Timestep ts) {
+    GE_PROFILE_FUNCTION();
     if (Input::IsKeyPressed(GE_KEY_LEFT))
         m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
     else if (Input::IsKeyPressed(GE_KEY_RIGHT))
@@ -31,6 +34,7 @@ void OrthographicCameraController::OnUpdate(Timestep ts) {
     m_CameraTranslationSpeed = m_ZoomLevel;
 }
 void OrthographicCameraController::OnEvent(Event &e) {
+    GE_PROFILE_FUNCTION();
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseScrolledEvent>(
         GE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
@@ -39,6 +43,7 @@ void OrthographicCameraController::OnEvent(Event &e) {
 }
 
 bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent &e) {
+    GE_PROFILE_FUNCTION();
     m_ZoomLevel -= e.GetYOffset() * 0.25f;
     m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
     m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
@@ -46,6 +51,7 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent &e) {
     return false;
 }
 bool OrthographicCameraController::OnWindowResized(WindowResizeEvent &e) {
+    GE_PROFILE_FUNCTION();
     m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
     m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
                            m_ZoomLevel);

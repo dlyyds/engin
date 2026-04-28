@@ -5,7 +5,7 @@
 #include "Core/KeyCodes.h"
 #include "Core/LayerStack.h"
 #include "Core/Log.h"
-#include "Core/MouseButtonCodes.h"
+#include "Core/MouseCodes.h"
 
 // Render
 #include "Renderer/Buffer.h"

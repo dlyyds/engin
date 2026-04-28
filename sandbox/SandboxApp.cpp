@@ -199,6 +199,7 @@ class ExampleLayer : public GE::Layer {
 class Sandbox : public GE::Application {
   public:
     Sandbox() {
+        GE_PROFILE_FUNCTION();
         // PushLayer(new ExampleLayer());
         PushLayer(new Sandbox2D());
     }
