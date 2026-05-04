@@ -47,6 +47,10 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
         // GE::Renderer2D::DrawRotatedQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f}, glm::radians(46.0),
         //                                 m_CheckerboardTexture, 10);
         // GE::Renderer2D::DrawQuad({0.0f, 0.0f, 0.1f}, {1.0f, 1.0f}, m_LogoTexture);
+        GE::Renderer2D::DrawQuad({-5.0f, -5.0f, -0.1f}, {10.0f, 10.0f}, m_CheckerboardTexture,
+                                 10.0f);
+        //  GE::Renderer2D::DrawQuad({-0.5f, -0.5f, 0.0f}, {1.0f, 1.0f},
+        //  m_CheckerboardTexture, 20.0f);
 
         GE::Renderer2D::EndScene();
     }
