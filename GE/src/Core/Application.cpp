@@ -43,6 +43,8 @@ Application::Application() {
 Application::~Application() {
     GE_PROFILE_FUNCTION();
     Renderer::Shutdown();
+
+    GE_CORE_INFO("Application Shoutdown");
 }
 void Application::Run() {
     GE_PROFILE_FUNCTION();
@@ -51,6 +53,24 @@ void Application::Run() {
 
         float time = (float)glfwGetTime();
         Timestep timestep = time - m_LastFrameTime;
+
+        // 帧率计算
+        {
+            m_FrameTimeAccumulator += timestep;
+            m_FrameCount++;
+
+            // 每累计 0.2 秒更新一次 FPS（平滑显示）
+            if (m_FrameTimeAccumulator >= 0.2f) {
+                m_FPS = (float)m_FrameCount / m_FrameTimeAccumulator;
+
+                // 重置
+                m_FrameTimeAccumulator = 0.0f;
+                m_FrameCount = 0;
+
+                //    GE_CORE_INFO("fps: {0}", m_FPS);
+            }
+        }
+
         m_LastFrameTime = time;
 
         if (!m_Minimized) {
@@ -74,9 +94,14 @@ void Application::OnEvent(Event &e) {
     dispatcher.Dispatch<WindowResizeEvent>(GE_BIND_EVENT_FN(Application::OnWindowResized));
 
     for (auto it = m_LayerStack.rbegin(); it != m_LayerStack.rend(); ++it) {
+        if (e.Handled)
+            break;
         (*it)->OnEvent(e);
     }
 }
+
+void Application::Close() { m_Running = false; }
+
 bool Application::OnWindowResized(WindowResizeEvent &e) {
     if (e.GetWidth() == 0 || e.GetHeight() == 0) {
         m_Minimized = true;

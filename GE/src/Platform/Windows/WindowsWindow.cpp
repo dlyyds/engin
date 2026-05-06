@@ -35,8 +35,6 @@ void WindowsWindow::Init(const WindowProps &props) {
     m_Data.Width = props.Width;
     m_Data.Height = props.Height;
 
-    GE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
-
     if (s_GLFWWindowCount == 0) {
         GE_PROFILE_SCOPE("glfwInit");
         // TODO: glfwTerminate on system shutdown
@@ -54,6 +52,7 @@ void WindowsWindow::Init(const WindowProps &props) {
 #endif
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(),
                                     nullptr, nullptr);
+        GE_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
     }
     // glfwMakeContextCurrent(m_Window);
     // int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -64,7 +63,9 @@ void WindowsWindow::Init(const WindowProps &props) {
         m_Context->Init();
     }
     glfwSetWindowUserPointer(m_Window, &m_Data);
-    SetVSync(true);
+
+    // 垂直同步
+    SetVSync(false);
 
     glfwSetWindowSizeCallback(m_Window, [](GLFWwindow *window, int width, int height) {
         WindowData &data = *(WindowData *)glfwGetWindowUserPointer(window);

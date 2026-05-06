@@ -28,8 +28,13 @@ class Application {
     void PushLayer(Layer *layer);
     void PushOverlay(Layer *layer);
 
-    inline Window &GetWindow() { return *m_Window; }
-    inline static Application &Get() { return *s_Instance; }
+    Window &GetWindow() { return *m_Window; }
+
+    void Close();
+
+    static Application &Get() { return *s_Instance; }
+
+    float GetFPS() { return m_FPS; }
 
   private:
     void Run();
@@ -43,6 +48,10 @@ class Application {
     LayerStack m_LayerStack;
     float m_LastFrameTime = 0.0f;
     bool m_Minimized = false;
+
+    float m_FPS = 0.0f;
+    float m_FrameTimeAccumulator = 0.0f;
+    int m_FrameCount = 0;
 
   private:
     static Application *s_Instance;

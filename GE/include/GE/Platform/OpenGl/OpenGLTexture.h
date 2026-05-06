@@ -21,6 +21,8 @@ class OpenGLTexture2D : public Texture2D {
         return m_RendererID == ((OpenGLTexture2D &)other).m_RendererID;
     }
 
+    virtual uint32_t GetRendererID() const override { return m_RendererID; }
+
   private:
     GLenum m_InternalFormat = 0, m_DataFormat = 0;
 

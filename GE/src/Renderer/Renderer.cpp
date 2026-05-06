@@ -30,6 +30,7 @@ void Renderer::Init() {
 void Renderer::Shutdown() {
     GE_PROFILE_FUNCTION();
     Renderer2D::Shutdown();
+    GE_CORE_INFO("Renderer Shoutdown");
 }
 
 void Renderer::OnWindowResize(uint32_t width, uint32_t height) {
