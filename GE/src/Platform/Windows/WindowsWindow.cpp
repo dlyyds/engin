@@ -41,7 +41,7 @@ void WindowsWindow::Init(const WindowProps &props) {
         GE_PROFILE_SCOPE("glfwInit");
         // TODO: glfwTerminate on system shutdown
         int success = glfwInit();
-        GE_CORE_ASSERT(success, "Could not intialize GLFW!");
+        GE_CORE_ASSERT(success, "Could not initialize GLFW!");
         GE_CORE_INFO("Initializing GLFW");
         glfwSetErrorCallback(GLFWErrorCallback);
     }

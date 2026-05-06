@@ -32,6 +32,7 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
         m_CameraController.OnUpdate(ts);
     }
 
+    GE::Renderer2D::ResetStats();
     // Render
     {
         GE_PROFILE_SCOPE("Renderer Prep");
@@ -41,16 +42,21 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
     {
         GE_PROFILE_SCOPE("Renderer Draw");
         GE::Renderer2D::BeginScene(m_CameraController.GetCamera());
-
+        static float rotate = 10.0f;
+        rotate += 6 * ts;
         GE::Renderer2D::DrawQuad({0.0f, 0.0f}, {0.6f, 1.0f}, m_SquareColor);
         GE::Renderer2D::DrawQuad({0.8f, 0.2f}, {0.5f, 1.0f}, {0.2f, 0.8f, 0.3f, 1.0f});
-        // GE::Renderer2D::DrawRotatedQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f}, glm::radians(46.0),
-        //                                 m_CheckerboardTexture, 10);
+        GE::Renderer2D::DrawRotatedQuad({4.0f, 0.0f, -0.1f}, {1.0f, 1.0f}, rotate,
+                                        m_CheckerboardTexture);
         // GE::Renderer2D::DrawQuad({0.0f, 0.0f, 0.1f}, {1.0f, 1.0f}, m_LogoTexture);
-        GE::Renderer2D::DrawQuad({-5.0f, -5.0f, -0.1f}, {10.0f, 10.0f}, m_CheckerboardTexture,
-                                 10.0f);
-        //  GE::Renderer2D::DrawQuad({-0.5f, -0.5f, 0.0f}, {1.0f, 1.0f},
-        //  m_CheckerboardTexture, 20.0f);
+        GE::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f}, m_CheckerboardTexture, 10.0f);
+
+        for (float y = -5.0f; y < 5.0f; y += 0.5f) {
+            for (float x = -5.0f; x < 5.0f; x += 0.5f) {
+                glm::vec4 color = {(x + 5.0f) / 10.0f, 0.4f, (y + 5.0f) / 10.0f, 0.7f};
+                GE::Renderer2D::DrawQuad({x, y}, {0.45f, 0.45f}, color);
+            }
+        }
 
         GE::Renderer2D::EndScene();
     }
@@ -60,6 +66,13 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
 void Sandbox2D::OnImGuiRender() {
     ImGui::Begin("Settings");
     ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
+
+    auto stats = GE::Renderer2D::GetStats();
+    ImGui::Text("Renderer2D Stats:");
+    ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+    ImGui::Text("Quads: %d", stats.QuadCount);
+    ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
+    ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
 
     ImGui::End();
 }
