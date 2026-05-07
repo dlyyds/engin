@@ -13,11 +13,14 @@
 
 #include "Core/Log.h"
 #define IMGUI_ENABLE_DOCKING
+
 namespace GE {
 
-ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
+ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {
+}
 
-ImGuiLayer::~ImGuiLayer() {}
+ImGuiLayer::~ImGuiLayer() {
+}
 
 void ImGuiLayer::OnAttach() {
 
@@ -27,10 +30,14 @@ void ImGuiLayer::OnAttach() {
     (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
     // io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;   // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
     io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable; // Enable Multi-Viewport / Platform Windows
-    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
-    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+
+    ImFontConfig config;
+    config.MergeMode = false;
+
+    io.Fonts->AddFontFromFileTTF("C:/Windows/Fonts/msyh.ttc", 28.0f, &config,
+                                 io.Fonts->GetGlyphRangesChineseFull());
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -67,6 +74,7 @@ void ImGuiLayer::Begin() {
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 }
+
 void ImGuiLayer::End() {
     ImGuiIO &io = ImGui::GetIO();
     Application &app = Application::Get();
@@ -84,6 +92,7 @@ void ImGuiLayer::End() {
     }
 }
 
-void ImGuiLayer::OnImGuiRender() {}
+void ImGuiLayer::OnImGuiRender() {
+}
 
 } // namespace GE

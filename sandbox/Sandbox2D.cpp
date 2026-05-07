@@ -16,11 +16,24 @@ Sandbox2D::Sandbox2D() : Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f
 
 void Sandbox2D::OnAttach() {
     GE_PROFILE_FUNCTION();
+
+    m_BuildTexture = GE::Texture2D::Create("assets/textures/building.png");
     m_CheckerboardTexture = GE::Texture2D::Create("assets/textures/Checkerboard.png");
     m_LogoTexture = GE::Texture2D::Create("assets/textures/ChernoLogo.png");
+
+    // Init here
+    m_Particle.ColorBegin = {254 / 255.0f, 212 / 255.0f, 123 / 255.0f, 1.0f};
+    m_Particle.ColorEnd = {254 / 255.0f, 109 / 255.0f, 41 / 255.0f, 1.0f};
+    m_Particle.SizeBegin = 0.5f, m_Particle.SizeVariation = 0.3f, m_Particle.SizeEnd = 0.0f;
+    m_Particle.LifeTime = 1.0f;
+    m_Particle.Velocity = {0.0f, 0.0f};
+    m_Particle.VelocityVariation = {3.0f, 1.0f};
+    m_Particle.Position = {0.0f, 0.0f};
+
 }
 
-void Sandbox2D::OnDetach() {}
+void Sandbox2D::OnDetach() {
+}
 
 void Sandbox2D::OnUpdate(GE::Timestep &ts) {
 
@@ -46,9 +59,10 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
         rotate += 6 * ts;
         GE::Renderer2D::DrawQuad({0.0f, 0.0f}, {0.6f, 1.0f}, m_SquareColor);
         GE::Renderer2D::DrawQuad({0.8f, 0.2f}, {0.5f, 1.0f}, {0.2f, 0.8f, 0.3f, 1.0f});
-        GE::Renderer2D::DrawRotatedQuad({4.0f, 0.0f, -0.1f}, {1.0f, 1.0f}, rotate, m_LogoTexture);
-        // GE::Renderer2D::DrawQuad({0.0f, 0.0f, 0.1f}, {1.0f, 1.0f}, m_LogoTexture);
+
         GE::Renderer2D::DrawQuad({0.0f, 0.0f, -0.1f}, {10.0f, 10.0f}, m_CheckerboardTexture, 10.0f);
+        //GE::Renderer2D::DrawQuad({0.0f, 0.0f, 0.1f}, {1.0f, 1.0f}, m_BuildTexture, 1.0f);
+        GE::Renderer2D::DrawQuad({2.0f, 0.0f, 0.1f}, {1.0f, 1.0f}, m_LogoTexture);
 
         // for (float y = -5.0f; y < 5.0f; y += 0.5f) {
         //     for (float x = -5.0f; x < 5.0f; x += 0.5f) {
@@ -59,11 +73,31 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
 
         GE::Renderer2D::EndScene();
     }
+    {
+        if (GE::Input::IsMouseButtonPressed(GE_MOUSE_BUTTON_LEFT)) {
+            auto [x, y] = GE::Input::GetMousePosition();
+            const auto width = GE
+                ::Application::Get().GetWindow().GetWidth();
+            const auto height = GE
+                ::Application::Get().GetWindow().GetHeight();
+
+            const auto bounds = m_CameraController.GetBounds();
+            auto pos = m_CameraController.GetCamera().GetPosition();
+            x = (x / width) * bounds.GetWidth() - bounds.GetWidth() * 0.5f;
+            y = bounds.GetHeight() * 0.5f - (y / height) * bounds.GetHeight();
+            m_Particle.Position = {x + pos.x, y + pos.y};
+            for (int i = 0; i < 5; i++)
+                m_ParticleSystem.Emit(m_Particle);
+        }
+
+        m_ParticleSystem.OnUpdate(ts);
+        m_ParticleSystem.OnRender(m_CameraController.GetCamera());
+    }
 }
 
-#define _CRT_SECURE_NO_WARNINGS
+
 void Sandbox2D::OnImGuiRender() {
-    static bool dockingEnabled = false;
+    static bool dockingEnabled = true;
     if (dockingEnabled) {
         static bool dockspaceOpen = true;
         static bool opt_fullscreen_persistant = true;
@@ -81,7 +115,7 @@ void Sandbox2D::OnImGuiRender() {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
             ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
             window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse |
-                            ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+                ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
             window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
         }
 
@@ -132,6 +166,7 @@ void Sandbox2D::OnImGuiRender() {
         ImGui::Text("Quads: %d", stats.QuadCount);
         ImGui::Text("Vertices: %d", stats.GetTotalVertexCount());
         ImGui::Text("Indices: %d", stats.GetTotalIndexCount());
+        ImGui::Text("FPS: %f", GE::Application::Get().GetFPS());
 
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 

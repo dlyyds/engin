@@ -4,8 +4,11 @@ set(CMAKE_CXX_STANDARD 17)
 # 总项目名称
 project(GE)
 
-set(CMAKE_BUILD_TYPE Debug)
+#set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_BUILD_TYPE Release)
+
+
+
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 

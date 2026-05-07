@@ -5,8 +5,11 @@
 
 namespace GE {
 OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
-    : m_AspectRatio(aspectRatio), m_Camera(-m_AspectRatio * m_ZoomLevel,
-                                           m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel),
+    : m_AspectRatio(aspectRatio),
+      m_Bounds({-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
+                m_ZoomLevel}),
+      m_Camera(-m_AspectRatio * m_ZoomLevel,
+               m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel),
       m_Rotation(rotation) {
     GE_PROFILE_FUNCTION();
 }
@@ -33,6 +36,7 @@ void OrthographicCameraController::OnUpdate(Timestep ts) {
     m_Camera.SetPosition(m_CameraPosition);
     m_CameraTranslationSpeed = m_ZoomLevel;
 }
+
 void OrthographicCameraController::OnEvent(Event &e) {
     GE_PROFILE_FUNCTION();
     EventDispatcher dispatcher(e);
@@ -46,15 +50,18 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent &e) {
     GE_PROFILE_FUNCTION();
     m_ZoomLevel -= e.GetYOffset() * 0.25f;
     m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
-    m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
-                           m_ZoomLevel);
+    m_Bounds = {-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
+                m_ZoomLevel};
+    m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
     return false;
 }
+
 bool OrthographicCameraController::OnWindowResized(WindowResizeEvent &e) {
     GE_PROFILE_FUNCTION();
-    m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
-    m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
-                           m_ZoomLevel);
+    m_AspectRatio = static_cast<float>(e.GetWidth()) / static_cast<float>(e.GetHeight());
+    m_Bounds = {-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
+                m_ZoomLevel};
+    m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
     // const float PIXELS_PER_UNIT = 100.0f;
 
     // // 窗口大小

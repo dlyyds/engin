@@ -19,29 +19,33 @@ namespace GE {
 class Shader;
 
 class Application {
-  public:
+public:
     Application();
+
     virtual ~Application();
 
     void OnEvent(Event &e);
 
     void PushLayer(Layer *layer);
+
     void PushOverlay(Layer *layer);
 
-    Window &GetWindow() { return *m_Window; }
+    [[nodiscard]] Window &GetWindow() const { return *m_Window; }
 
     void Close();
 
     static Application &Get() { return *s_Instance; }
 
-    float GetFPS() { return m_FPS; }
+    [[nodiscard]] float GetFPS() const { return m_FPS; }
 
-  private:
+private:
     void Run();
+
     bool OnWindowClose(WindowCloseEvent &e);
+
     bool OnWindowResized(WindowResizeEvent &e);
 
-  private:
+private:
     ImGuiLayer *m_ImGuiLayer;
     bool m_Running = true;
     Scope<Window> m_Window;
@@ -53,8 +57,9 @@ class Application {
     float m_FrameTimeAccumulator = 0.0f;
     int m_FrameCount = 0;
 
-  private:
+private:
     static Application *s_Instance;
+
     friend int ::main(int argc, char **argv);
 };
 
