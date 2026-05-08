@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core.h"
+#include "Base.h"
 #include "Event/ApplicationEvent.h"
 #include "GEWindow.h"
 #include "ImGui/ImGuiLayer.h"
@@ -20,7 +20,7 @@ class Shader;
 
 class Application {
 public:
-    Application();
+    Application(const std::string &name = "GE App");
 
     virtual ~Application();
 

@@ -1,6 +1,6 @@
 
 #pragma once
-#include "Core/Core.h"
+#include "Core/Base.h"
 #include "glm/glm.hpp"
 
 namespace GE {

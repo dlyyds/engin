@@ -7,9 +7,6 @@ project(GE)
 #set(CMAKE_BUILD_TYPE Debug)
 #set(CMAKE_BUILD_TYPE Release)
 
-
-
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # 输出目录
@@ -17,13 +14,10 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
-# 中间文件目录
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin-int)
-
 
 set(GE_NAME GE)       # 引擎DLL名称
-set(APP_NAME Sandbox)  
-
+set(Sandbox_NAME Sandbox)
+set(Editor_NAME GE_Editor)
 #GameGEe DLL
 
 add_subdirectory(GE/vendor/spdlog)
@@ -32,51 +26,66 @@ add_subdirectory(GE/vendor/glad)
 add_subdirectory(GE/vendor/imgui)
 
 file(GLOB GE_SRC
-    ${CMAKE_SOURCE_DIR}/GE/src/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/src/Platform/Windows/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/src/Platform/OpenGL/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/src/ImGui/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/src/Renderer/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/src/Core/*.cpp
-    ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/Platform/Windows/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/Platform/OpenGL/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/ImGui/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/Renderer/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/Core/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage/*.cpp
 )
 
 
 add_library(${GE_NAME} STATIC ${GE_SRC})
-target_include_directories(${GE_NAME} PUBLIC 
-${CMAKE_SOURCE_DIR}/GE/include/GE
-${CMAKE_SOURCE_DIR}/GE/vendor/glm
-${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
+target_include_directories(${GE_NAME} PUBLIC
+        ${CMAKE_SOURCE_DIR}/GE/include/GE
+        ${CMAKE_SOURCE_DIR}/GE/vendor/glm
+        ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
 )
-target_compile_definitions(${GE_NAME} PRIVATE 
-GLFW_INCLUDE_NONE
-#GE_DEBUG
-NOMINMAX
+target_compile_definitions(${GE_NAME} PRIVATE
+        GLFW_INCLUDE_NONE
+        #GE_DEBUG
+        NOMINMAX
 )
-target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui )
+target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
 
 
-if(WIN32)
+if (WIN32)
     target_link_libraries(${GE_NAME} PUBLIC
-        opengl32        # OpenGL 
+            opengl32        # OpenGL
     )
-endif()
+endif ()
 # 开启预编译头 PCH
 target_precompile_headers(${GE_NAME} PRIVATE GE/include/GE/pch.h)
 
 
-#Sandbox EXE 调用 DLL
+#Sandbox EXE
 # ==============================================
 
-file(GLOB APP_SRC
-   ${CMAKE_SOURCE_DIR}/sandbox/*.cpp
+file(GLOB Sandbox_SRC
+        ${CMAKE_SOURCE_DIR}/sandbox/*.cpp
 )
 
 
-add_executable(${APP_NAME} ${APP_SRC})
-target_include_directories(${APP_NAME} PRIVATE 
-${CMAKE_SOURCE_DIR}/GE/include
-${CMAKE_SOURCE_DIR}/GE/vendor/glm
-${CMAKE_SOURCE_DIR}/GE/vendor/imgui
+add_executable(${Sandbox_NAME} ${Sandbox_SRC})
+target_include_directories(${Sandbox_NAME} PRIVATE
+        ${CMAKE_SOURCE_DIR}/GE/include
+        ${CMAKE_SOURCE_DIR}/GE/vendor/glm
+        ${CMAKE_SOURCE_DIR}/GE/vendor/imgui
 )
-target_link_libraries(${APP_NAME} PRIVATE ${GE_NAME})
+target_link_libraries(${Sandbox_NAME} PRIVATE ${GE_NAME})
+
+
+#Editor
+file(GLOB Editor_SRC
+        ${CMAKE_SOURCE_DIR}/GE_Editor/src/*.cpp
+)
+
+
+add_executable(${Editor_NAME} ${Editor_SRC})
+target_include_directories(${Editor_NAME} PRIVATE
+        ${CMAKE_SOURCE_DIR}/GE/include
+        ${CMAKE_SOURCE_DIR}/GE/vendor/glm
+        ${CMAKE_SOURCE_DIR}/GE/vendor/imgui
+)
+target_link_libraries(${Editor_NAME} PRIVATE ${GE_NAME})

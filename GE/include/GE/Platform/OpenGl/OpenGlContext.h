@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Core.h"
+#include "Core/Base.h"
 #include "Platform/OpenGl/OpenGlContext.h"
 #include "Renderer/GraphicsContext.h"
 
@@ -8,13 +8,16 @@ struct GLFWwindow;
 
 namespace GE {
 class OpenGLContext : public GraphicsContext {
-  public:
+public:
     OpenGLContext(GLFWwindow *windowHandle);
+
     ~OpenGLContext();
+
     void Init() override;
+
     void SwapBuffers() override;
 
-  private:
+private:
     GLFWwindow *m_WindowHandle;
 };
 } // namespace GE

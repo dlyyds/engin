@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Core.h"
+#include "Core/Base.h"
 #include "Core/Layer.h"
 
 #include "Event/ApplicationEvent.h"
@@ -10,19 +10,24 @@
 namespace GE {
 
 class ImGuiLayer : public Layer {
-  public:
+public:
     ImGuiLayer();
+
     ~ImGuiLayer();
 
     virtual void OnAttach() override;
+
     virtual void OnDetach() override;
+
     virtual void OnImGuiRender() override;
+
     virtual void OnEvent(Event &e) override;
 
     void Begin();
+
     void End();
 
-  private:
+private:
     float m_Time = 0.0f;
 };
 

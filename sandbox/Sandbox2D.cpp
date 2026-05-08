@@ -6,7 +6,6 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
-#include "Debug/Instrumentor.h"
 
 #include "iostream"
 
@@ -30,6 +29,10 @@ void Sandbox2D::OnAttach() {
     m_Particle.VelocityVariation = {3.0f, 1.0f};
     m_Particle.Position = {0.0f, 0.0f};
 
+    GE::FramebufferSpecification fbSpec;
+    fbSpec.Width = 1280;
+    fbSpec.Height = 720;
+    m_Framebuffer = GE::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach() {
@@ -49,6 +52,7 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
     // Render
     {
         GE_PROFILE_SCOPE("Renderer Prep");
+        m_Framebuffer->Bind();
         GE::RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
         GE::RenderCommand::Clear();
     }
@@ -72,6 +76,7 @@ void Sandbox2D::OnUpdate(GE::Timestep &ts) {
         // }
 
         GE::Renderer2D::EndScene();
+        m_Framebuffer->Unbind();
     }
     {
         if (GE::Input::IsMouseButtonPressed(GE_MOUSE_BUTTON_LEFT)) {
@@ -170,8 +175,9 @@ void Sandbox2D::OnImGuiRender() {
 
         ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-        uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-        ImGui::Image((void *)(int64_t)textureID, ImVec2{256.0f, 256.0f});
+        uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+        ImGui::Image((void *)static_cast<uint64_t>(textureID), ImVec2{1280, 720}, ImVec2(0, 1),
+                     ImVec2(1, 0));
         ImGui::End();
 
         ImGui::End();
@@ -197,5 +203,6 @@ void Sandbox2D::OnImGuiRender() {
 void Sandbox2D::OnEvent(GE::Event &e) {
 
     GE_PROFILE_FUNCTION();
+    GE_TRACE("Sandbox2D::OnEvent {0}", e);
     m_CameraController.OnEvent(e);
 }

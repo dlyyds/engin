@@ -1,6 +1,6 @@
 
 #include "Platform/OpenGl/OpenGLShader.h"
-#include "Core/Core.h"
+#include "Core/Base.h"
 #include "Core/Log.h"
 #include <glm/glm.hpp>
 

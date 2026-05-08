@@ -1,11 +1,13 @@
 #pragma once
-#include "Core/Core.h"
+#include "Core/Base.h"
 
 namespace GE {
 class GraphicsContext {
-  public:
+public:
     virtual void Init() = 0;
+
     virtual void SwapBuffers() = 0;
+
     static Scope<GraphicsContext> Create(void *window);
 };
 } // namespace GE

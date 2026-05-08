@@ -3,33 +3,38 @@
 #include "Core/GEWindow.h"
 #include "Renderer/GraphicsContext.h"
 
-struct GLFWwindow {};
+struct GLFWwindow {
+};
 
 namespace GE {
 
-class WindowsWindow : public Window {
-  public:
-    WindowsWindow(const WindowProps &props);
-    virtual ~WindowsWindow();
+class WindowsWindow final : public Window {
+public:
+    explicit WindowsWindow(const WindowProps &props);
+
+    ~WindowsWindow() override;
 
     void OnUpdate() override;
 
-    inline uint32_t GetWidth() const override { return m_Data.Width; }
-    inline uint32_t GetHeight() const override { return m_Data.Height; }
+    [[nodiscard]] uint32_t GetWidth() const override { return m_Data.Width; }
+    [[nodiscard]] uint32_t GetHeight() const override { return m_Data.Height; }
 
-    inline virtual void *GetNativeWindow() const override { return m_Window; }
+    [[nodiscard]] void *GetNativeWindow() const override { return m_Window; }
     // Window attributes
-    inline void SetEventCallback(const EventCallbackFn &callback) override {
+    void SetEventCallback(const EventCallbackFn &callback) override {
         m_Data.EventCallback = callback;
     }
-    void SetVSync(bool enabled) override;
-    bool IsVSync() const override;
 
-  private:
+    void SetVSync(bool enabled) override;
+
+    [[nodiscard]] bool IsVSync() const override;
+
+private:
     virtual void Init(const WindowProps &props);
+
     virtual void Shutdown();
 
-  private:
+private:
     GLFWwindow *m_Window;
 
     Scope<GraphicsContext> m_Context;
