@@ -46,7 +46,12 @@ void OrthographicCameraController::OnEvent(Event &e) {
         GE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 }
 
-bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent &e) {
+void OrthographicCameraController::OnResize(const float width, const float height) {
+    m_AspectRatio = width / height;
+    m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
+}
+
+bool OrthographicCameraController::OnMouseScrolled(const MouseScrolledEvent &e) {
     GE_PROFILE_FUNCTION();
     m_ZoomLevel -= e.GetYOffset() * 0.25f;
     m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
@@ -56,12 +61,9 @@ bool OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent &e) {
     return false;
 }
 
-bool OrthographicCameraController::OnWindowResized(WindowResizeEvent &e) {
+bool OrthographicCameraController::OnWindowResized(const WindowResizeEvent &e) {
     GE_PROFILE_FUNCTION();
-    m_AspectRatio = static_cast<float>(e.GetWidth()) / static_cast<float>(e.GetHeight());
-    m_Bounds = {-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel,
-                m_ZoomLevel};
-    m_Camera.SetProjection(m_Bounds.Left, m_Bounds.Right, m_Bounds.Bottom, m_Bounds.Top);
+    OnResize(static_cast<float>(e.GetWidth()), static_cast<float>(e.GetHeight()));
     // const float PIXELS_PER_UNIT = 100.0f;
 
     // // 窗口大小

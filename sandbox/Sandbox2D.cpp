@@ -203,6 +203,6 @@ void Sandbox2D::OnImGuiRender() {
 void Sandbox2D::OnEvent(GE::Event &e) {
 
     GE_PROFILE_FUNCTION();
-    GE_TRACE("Sandbox2D::OnEvent {0}", e);
+    //GE_TRACE("Sandbox2D::OnEvent {0}", e);
     m_CameraController.OnEvent(e);
 }

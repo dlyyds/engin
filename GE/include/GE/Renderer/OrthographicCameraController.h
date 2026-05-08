@@ -26,6 +26,8 @@ public:
 
     void OnEvent(Event &e);
 
+    void OnResize(float width, float height);
+
     OrthographicCamera &GetCamera() { return m_Camera; }
     [[nodiscard]] const OrthographicCamera &GetCamera() const { return m_Camera; }
 
@@ -34,9 +36,9 @@ public:
     }
 
 private:
-    bool OnMouseScrolled(MouseScrolledEvent &e);
+    bool OnMouseScrolled(const MouseScrolledEvent &e);
 
-    bool OnWindowResized(WindowResizeEvent &e);
+    bool OnWindowResized(const WindowResizeEvent &e);
 
 private:
     float m_AspectRatio;

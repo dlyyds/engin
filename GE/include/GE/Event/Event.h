@@ -52,21 +52,26 @@ enum EventCategory {
 class Event {
     friend class EventDispatcher;
 
-  public:
+public:
     bool Handled = false;
+
     virtual EventType GetEventType() const = 0;
+
     virtual const char *GetName() const = 0;
+
     virtual int GetCategoryFlags() const = 0;
+
     virtual std::string ToString() const { return GetName(); }
 
-    inline bool IsInCategory(EventCategory category) { return GetCategoryFlags() & category; }
+    inline bool IsInCategory(EventCategory category) const { return GetCategoryFlags() & category; }
 };
 
 class EventDispatcher {
     template <typename T> using EventFn = std::function<bool(T &)>;
 
-  public:
-    EventDispatcher(Event &event) : m_Event(event) {}
+public:
+    explicit EventDispatcher(Event &event) : m_Event(event) {
+    }
 
     template <typename T> bool Dispatch(EventFn<T> func) {
         if (m_Event.GetEventType() == T::GetStaticType()) {
@@ -76,7 +81,7 @@ class EventDispatcher {
         return false;
     }
 
-  private:
+private:
     Event &m_Event;
 };
 
@@ -85,7 +90,7 @@ inline std::ostream &operator<<(std::ostream &os, const Event &e) { return os <<
 } // namespace GE
 
 template <typename T>
-struct fmt::formatter<T, std::enable_if_t<std::is_base_of<GE::Event, T>::value, char>>
+struct fmt::formatter<T, std::enable_if_t<std::is_base_of<GE::Event, T>::value, char> >
     : fmt::formatter<std::string> {
     auto format(const GE::Event &e, format_context &ctx) const {
         return fmt::formatter<std::string>::format(e.ToString(), ctx);
