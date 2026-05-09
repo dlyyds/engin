@@ -23,12 +23,16 @@ public:
 
     virtual void OnEvent(Event &e) override;
 
-    void Begin();
+    static void Begin();
 
-    void End();
+    static void End();
+
+    void BlockEvents(const bool block) { m_BlockEvents = block; }
 
 private:
     float m_Time = 0.0f;
+
+    bool m_BlockEvents = true;
 };
 
 } // namespace GE

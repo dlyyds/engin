@@ -38,12 +38,14 @@ public:
 
     [[nodiscard]] float GetFPS() const { return m_FPS; }
 
+    [[nodiscard]] ImGuiLayer *GetImGuiLayer() const { return m_ImGuiLayer; }
+
 private:
     void Run();
 
     bool OnWindowClose(WindowCloseEvent &e);
 
-    bool OnWindowResized(WindowResizeEvent &e);
+    bool OnWindowResized(const WindowResizeEvent &e);
 
 private:
     ImGuiLayer *m_ImGuiLayer;

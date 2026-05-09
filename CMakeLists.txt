@@ -32,6 +32,7 @@ file(GLOB GE_SRC
         ${CMAKE_SOURCE_DIR}/GE/src/ImGui/*.cpp
         ${CMAKE_SOURCE_DIR}/GE/src/Renderer/*.cpp
         ${CMAKE_SOURCE_DIR}/GE/src/Core/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE/src/Scene/*.cpp
         ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage/*.cpp
 )
 
@@ -41,6 +42,7 @@ target_include_directories(${GE_NAME} PUBLIC
         ${CMAKE_SOURCE_DIR}/GE/include/GE
         ${CMAKE_SOURCE_DIR}/GE/vendor/glm
         ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
+        ${CMAKE_SOURCE_DIR}/GE/vendor/entt
 )
 target_compile_definitions(${GE_NAME} PRIVATE
         GLFW_INCLUDE_NONE

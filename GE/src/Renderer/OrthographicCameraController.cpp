@@ -42,8 +42,8 @@ void OrthographicCameraController::OnEvent(Event &e) {
     EventDispatcher dispatcher(e);
     dispatcher.Dispatch<MouseScrolledEvent>(
         GE_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
-    dispatcher.Dispatch<WindowResizeEvent>(
-        GE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
+    // dispatcher.Dispatch<WindowResizeEvent>(
+    //     GE_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 }
 
 void OrthographicCameraController::OnResize(const float width, const float height) {

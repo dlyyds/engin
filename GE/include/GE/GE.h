@@ -20,6 +20,11 @@
 #include "Renderer/VertexArray.h"
 #include "Renderer/Framebuffer.h"
 
+
+//Scene
+#include "Scene/Scene.h"
+#include "Scene/Components.h"
+
 #include "Platform/Windows/WindowsWindow.h"
 
 #include "ImGui/ImGuiLayer.h"

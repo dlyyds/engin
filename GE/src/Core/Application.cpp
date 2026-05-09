@@ -101,7 +101,7 @@ void Application::OnEvent(Event &e) {
 
 void Application::Close() { m_Running = false; }
 
-bool Application::OnWindowResized(WindowResizeEvent &e) {
+bool Application::OnWindowResized(const WindowResizeEvent &e) {
     if (e.GetWidth() == 0 || e.GetHeight() == 0) {
         m_Minimized = true;
         return false;
@@ -128,4 +128,6 @@ void Application::PushOverlay(Layer *layer) {
     m_LayerStack.PushOverlay(layer);
     layer->OnAttach();
 }
+
+
 } // namespace GE
