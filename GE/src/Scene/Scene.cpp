@@ -23,7 +23,20 @@ Entity Scene::CreateEntity(const std::string &name) {
     return entity;
 }
 
-void Scene::OnUpdate(Timestep ts) {
+void Scene::OnUpdate(const Timestep ts) {
+    //update Script
+    {
+        m_Registry.view<NativeScriptComponent>().each([&](auto entity, NativeScriptComponent &nsc) {
+            if (!nsc.Instance) {
+                nsc.InstantiateFunction();
+                nsc.Instance->m_Entity = {entity, this};
+                if (nsc.OnCreateFunction)
+                    nsc.OnCreateFunction();
+            }
+            if (nsc.OnUpdateFunction)
+                nsc.OnUpdateFunction(ts);
+        });
+    }
 
     const Camera *mainCamera = nullptr;
     const glm::mat4 *cameraTransform = nullptr;

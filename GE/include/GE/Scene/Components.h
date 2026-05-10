@@ -3,6 +3,7 @@
 #include <glm/glm.hpp>
 #include <utility>
 #include "SceneCamera.h"
+#include "ScriptableEntity.h"
 
 namespace GE {
 
@@ -47,14 +48,36 @@ struct SpriteRendererComponent {
 
 struct CameraComponent {
     SceneCamera Camera;
-    bool Primary = true; // TODO: think about moving to Scene
+    bool Primary = true;
     bool FixedAspectRatio = false;
 
     CameraComponent() = delete;
 
     CameraComponent(const CameraComponent &) = default;
 
+};
+
+struct NativeScriptComponent {
+    ScriptableEntity *Instance;
+
+    std::function<void()> InstantiateFunction;
+    std::function<void()> DestroyFunction;
+
+    std::function<void()> OnCreateFunction;
+    std::function<void(Timestep ts)> OnUpdateFunction;
+    std::function<void()> OnDestroyFunction;
+
+
+    template <typename T>
+    void Bind() {
+        InstantiateFunction = [&]() { Instance = new T(); };
+        DestroyFunction = [&]() { delete Instance; };
+        OnCreateFunction = [&]() { static_cast<T *>(Instance)->OnCreate(); };
+        OnUpdateFunction = [&](Timestep ts) { static_cast<T *>(Instance)->OnUpdate(ts); };
+        OnDestroyFunction = [&]() { static_cast<T *>(Instance)->OnDestroy(); };
+    }
 
 };
+
 
 }

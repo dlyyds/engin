@@ -48,6 +48,7 @@ target_compile_definitions(${GE_NAME} PRIVATE
         GLFW_INCLUDE_NONE
         #GE_DEBUG
         NOMINMAX
+        GE_ENABLE_ASSERTS
 )
 target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
 
