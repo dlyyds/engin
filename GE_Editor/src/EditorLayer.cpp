@@ -1,4 +1,7 @@
 #include "EditorLayer.h"
+
+#include "Scene/Entity.h"
+
 #include <imgui.h>
 
 #include <glm/gtc/matrix_transform.hpp>
@@ -23,11 +26,13 @@ void EditorLayer::OnAttach() {
 
     m_ActiveScene = CreateRef<Scene>();
 
-    const auto square = m_ActiveScene->CreateEntity();
-    m_ActiveScene->Reg().emplace<TransformComponent>(square);
-    m_ActiveScene->Reg().emplace<SpriteRendererComponent>(square, glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+    m_SquareEntity = m_ActiveScene->CreateEntity("square");
+    m_CameraEntity = m_ActiveScene->CreateEntity("camera");
 
-    m_SquareEntity = square;
+    m_SquareEntity.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
+
+    m_CameraEntity.AddComponent<CameraComponent>();
+
 }
 
 void EditorLayer::OnDetach() {
@@ -44,19 +49,24 @@ void EditorLayer::OnUpdate(Timestep &ts) {
     // Render
     Renderer2D::ResetStats();
 
-    if (m_ViewportResize) {
-        m_Framebuffer->Resize(m_ViewportSize.x, m_ViewportSize.y);
+    const FramebufferSpecification spec = m_Framebuffer->GetSpecification();
+    if (m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f &&
+        (spec.Width != static_cast<uint32_t>(m_ViewportSize.x)
+         || spec.Height != static_cast<uint32_t>(m_ViewportSize.y))) {
+        m_Framebuffer->Resize(static_cast<uint32_t>(m_ViewportSize.x), static_cast<uint32_t>(m_ViewportSize.y));
         m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
-        m_ViewportResize = false;
+
+        m_ActiveScene->OnViewportResize(static_cast<uint32_t>(m_ViewportSize.x),
+                                        static_cast<uint32_t>(m_ViewportSize.y));
     }
 
     m_Framebuffer->Bind();
     RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1});
     RenderCommand::Clear();
 
-    Renderer2D::BeginScene(m_CameraController.GetCamera());
+    //  Renderer2D::BeginScene(m_CameraController.GetCamera());
     m_ActiveScene->OnUpdate(ts);
-    Renderer2D::EndScene();
+    //   Renderer2D::EndScene();
     m_Framebuffer->Unbind();
 
 }
@@ -136,8 +146,23 @@ void EditorLayer::OnImGuiRender() {
     ImGui::Text("focus viewport: %d", m_ViewportFocused);
     ImGui::Text("hover viewport: %d", m_ViewportHovered);
 
-    auto &squareColor = m_ActiveScene->Reg().get<SpriteRendererComponent>(m_SquareEntity).Color;
-    ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+    if (m_SquareEntity) {
+        ImGui::Separator();
+        const auto &tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
+        ImGui::Text("%s", tag.c_str());
+
+        auto &squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
+        ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
+        ImGui::Separator();
+    }
+    ImGui::DragFloat3("Camera Transform",
+                      glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
+
+    auto &camera = m_CameraEntity.GetComponent<CameraComponent>().Camera;
+    float orthoSize = camera.GetOrthographicSize();
+    if (ImGui::DragFloat("Second Camera Ortho Size", &orthoSize))
+        camera.SetOrthographicSize(orthoSize);
+
     ImGui::End();
 
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{0, 0});
@@ -147,11 +172,12 @@ void EditorLayer::OnImGuiRender() {
     Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused || !m_ViewportHovered);
 
     ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+
     if (m_ViewportSize != *reinterpret_cast<glm::vec2 *>(&viewportPanelSize)) {
         m_ViewportResize = true;
         m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
     }
-    uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+    const uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
     ImGui::Image((void *)static_cast<uint64_t>(textureID), viewportPanelSize, ImVec2{0, 1},
                  ImVec2{1, 0});
     ImGui::End();

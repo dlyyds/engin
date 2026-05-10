@@ -116,6 +116,17 @@ void Renderer2D::BeginScene(const OrthographicCamera &camera) {
     s_Data->QuadVertexBufferPtr = s_Data->QuadVertexBufferBase;
 }
 
+void Renderer2D::BeginScene(const Camera &camera, const glm::mat4 &transform) {
+    GE_PROFILE_FUNCTION();
+    s_Data->TextureShader->Bind();
+
+    const glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
+    s_Data->TextureShader->SetMat4("u_ViewProjection", viewProj);
+
+    s_Data->QuadIndexCount = 0;
+    s_Data->QuadVertexBufferPtr = s_Data->QuadVertexBufferBase;
+}
+
 void Renderer2D::EndScene() {
     GE_PROFILE_FUNCTION();
     uint32_t dataSize =

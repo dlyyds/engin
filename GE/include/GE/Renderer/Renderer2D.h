@@ -2,6 +2,7 @@
 
 #include "OrthographicCamera.h"
 #include "Texture.h"
+#include "Renderer/Camera.h"
 
 namespace GE {
 
@@ -12,6 +13,8 @@ public:
     static void Shutdown();
 
     static void BeginScene(const OrthographicCamera &camera);
+
+    static void BeginScene(const Camera &camera, const glm::mat4 &transform);
 
     static void EndScene();
 
@@ -53,8 +56,8 @@ public:
         uint32_t DrawCalls = 0;
         uint32_t QuadCount = 0;
 
-        uint32_t GetTotalVertexCount() { return QuadCount * 4; }
-        uint32_t GetTotalIndexCount() { return QuadCount * 6; }
+        [[nodiscard]] uint32_t GetTotalVertexCount() const { return QuadCount * 4; }
+        [[nodiscard]] uint32_t GetTotalIndexCount() const { return QuadCount * 6; }
     };
 
     static void ResetStats();

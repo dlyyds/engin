@@ -1,8 +1,22 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <utility>
+#include "SceneCamera.h"
 
 namespace GE {
+
+
+struct TagComponent {
+    std::string Tag;
+
+    TagComponent() = default;
+
+    TagComponent(const TagComponent &) = default;
+
+    explicit TagComponent(std::string tag) : Tag(std::move(tag)) {
+    }
+};
 
 struct TransformComponent {
     glm::mat4 Transform{1.0f};
@@ -26,9 +40,21 @@ struct SpriteRendererComponent {
 
     SpriteRendererComponent(const SpriteRendererComponent &) = default;
 
-    SpriteRendererComponent(const glm::vec4 &color)
+    explicit SpriteRendererComponent(const glm::vec4 &color)
         : Color(color) {
     }
+};
+
+struct CameraComponent {
+    SceneCamera Camera;
+    bool Primary = true; // TODO: think about moving to Scene
+    bool FixedAspectRatio = false;
+
+    CameraComponent() = delete;
+
+    CameraComponent(const CameraComponent &) = default;
+
+
 };
 
 }

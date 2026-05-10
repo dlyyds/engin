@@ -1,11 +1,13 @@
 #pragma once
 #include "glm/glm.hpp"
+
 namespace GE {
 class OrthographicCamera {
-  public:
+public:
     OrthographicCamera(float left, float right, float bottom, float top);
 
     const glm::vec3 &GetPosition() const { return m_Position; }
+
     void SetPosition(const glm::vec3 &position) {
         m_Position = position;
         RecalculateViewMatrix();
@@ -20,14 +22,14 @@ class OrthographicCamera {
         RecalculateViewMatrix();
     }
 
-    const glm::mat4 &GetViewMatrix() const { return m_ViewMatrix; }
-    const glm::mat4 &GetProjectionMatrix() const { return m_ProjectionMatrix; }
-    const glm::mat4 &GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
+    [[nodiscard]] const glm::mat4 &GetViewMatrix() const { return m_ViewMatrix; }
+    [[nodiscard]] const glm::mat4 &GetProjectionMatrix() const { return m_ProjectionMatrix; }
+    [[nodiscard]] const glm::mat4 &GetViewProjectionMatrix() const { return m_ViewProjectionMatrix; }
 
-  private:
+private:
     void RecalculateViewMatrix();
 
-  private:
+private:
     glm::mat4 m_ViewMatrix;
     glm::mat4 m_ProjectionMatrix;
     glm::mat4 m_ViewProjectionMatrix;

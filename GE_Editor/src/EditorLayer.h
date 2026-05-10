@@ -30,7 +30,8 @@ private:
 
 
     Ref<Scene> m_ActiveScene;
-    entt::entity m_SquareEntity{};
+    Entity m_SquareEntity{};
+    Entity m_CameraEntity{};
 
     glm::vec2 m_ViewportSize = {0.0f, 0.0f};
     bool m_ViewportResize = false;
