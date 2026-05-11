@@ -4,19 +4,19 @@
 #include "Core/Log.h"
 #include "GLFW/glfw3.h"
 #include "Platform/OpenGl/OpenGlContext.h"
-
+#include "Debug/Assert.h"
 
 namespace GE {
 
 OpenGLContext::OpenGLContext(GLFWwindow *windowHandle)
     : m_WindowHandle(windowHandle) {
 
-  GE_CORE_ASSERT(windowHandle, "Window handle is null!")
-
+    GE_CORE_ASSERT(windowHandle, "Window handle is null!")
 
 }
 
-OpenGLContext::~OpenGLContext() {}
+OpenGLContext::~OpenGLContext() {
+}
 
 void OpenGLContext::Init() {
     glfwMakeContextCurrent(m_WindowHandle);

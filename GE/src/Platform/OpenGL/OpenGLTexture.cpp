@@ -4,6 +4,8 @@
 #include "Platform/OpenGl/OpenGLTexture.h"
 #include "stb_image.h"
 
+#include "Debug/Assert.h"
+
 namespace GE {
 OpenGLTexture2D::OpenGLTexture2D(const std::string &path) {
     int width, height, channels;
@@ -67,7 +69,11 @@ void OpenGLTexture2D::SetData(void *data, uint32_t size) {
                         data);
 }
 
-OpenGLTexture2D::~OpenGLTexture2D() { glDeleteTextures(1, &m_RendererID); }
+OpenGLTexture2D::~OpenGLTexture2D() {
+    glDeleteTextures(1, &m_RendererID);
+}
 
-void OpenGLTexture2D::Bind(uint32_t slot) const { glBindTextureUnit(slot, m_RendererID); }
+void OpenGLTexture2D::Bind(uint32_t slot) const {
+    glBindTextureUnit(slot, m_RendererID);
+}
 } // namespace GE

@@ -44,11 +44,9 @@ target_include_directories(${GE_NAME} PUBLIC
         ${CMAKE_SOURCE_DIR}/GE/vendor/stbimage
         ${CMAKE_SOURCE_DIR}/GE/vendor/entt
 )
-target_compile_definitions(${GE_NAME} PRIVATE
+target_compile_definitions(${GE_NAME} PUBLIC
         GLFW_INCLUDE_NONE
-        #GE_DEBUG
-        NOMINMAX
-        GE_ENABLE_ASSERTS
+        GE_DEBUG
 )
 target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
 
@@ -82,6 +80,7 @@ target_link_libraries(${Sandbox_NAME} PRIVATE ${GE_NAME})
 #Editor
 file(GLOB Editor_SRC
         ${CMAKE_SOURCE_DIR}/GE_Editor/src/*.cpp
+        ${CMAKE_SOURCE_DIR}/GE_Editor/src/Panels/*.cpp
 )
 
 

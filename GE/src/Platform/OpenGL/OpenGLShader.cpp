@@ -4,6 +4,7 @@
 #include "Core/Log.h"
 #include <glm/glm.hpp>
 
+#include "Debug/Assert.h"
 #include <glm/gtc/type_ptr.hpp>
 
 namespace GE {
@@ -148,8 +149,9 @@ std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::stri
         size_t nextLinePos = source.find_first_not_of("\r\n", eol);
         pos = source.find(typeToken, nextLinePos);
         shaderSources[ShaderTypeFromString(type)] =
-            source.substr(nextLinePos, pos - (nextLinePos == std::string::npos ? source.size() - 1
-                                                                               : nextLinePos));
+            source.substr(nextLinePos, pos - (nextLinePos == std::string::npos
+                                                  ? source.size() - 1
+                                                  : nextLinePos));
     }
 
     return shaderSources;

@@ -2,6 +2,8 @@
 
 #include "GE.h"
 
+#include "Panels/SceneHierarchyPanel.h"
+
 namespace GE {
 
 class EditorLayer : public Layer {
@@ -41,6 +43,8 @@ private:
     Ref<Texture2D> m_CheckerboardTexture;
 
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
+
+    SceneHierarchyPanel m_SceneHierarchyPanel;
 };
 
 }

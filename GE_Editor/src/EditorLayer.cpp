@@ -25,33 +25,37 @@ void EditorLayer::OnAttach() {
     m_Framebuffer = Framebuffer::Create(fbSpec);
 
     m_ActiveScene = CreateRef<Scene>();
+    m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
     m_SquareEntity = m_ActiveScene->CreateEntity("square");
+    Entity square = m_ActiveScene->CreateEntity("square2");
+
     m_CameraEntity = m_ActiveScene->CreateEntity("camera");
 
+    square.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 1.0f, 1.0f});
     m_SquareEntity.AddComponent<SpriteRendererComponent>(glm::vec4{0.0f, 1.0f, 0.0f, 1.0f});
 
     m_CameraEntity.AddComponent<CameraComponent>();
 
     class CameraController : public ScriptableEntity {
     public:
-        void OnCreate() {
+        void OnCreate() override {
         }
 
-        void OnDestroy() {
+        void OnDestroy() override {
         }
 
-        void OnUpdate(Timestep ts) {
+        void OnUpdate(Timestep ts) override {
             auto &transform = GetComponent<TransformComponent>().Transform;
             float speed = 5.0f;
 
-            if (Input::IsKeyPressed(KeyCode::A))
+            if (Input::IsKeyPressed(Key::A))
                 transform[3][0] -= speed * ts;
-            if (Input::IsKeyPressed(KeyCode::D))
+            if (Input::IsKeyPressed(Key::D))
                 transform[3][0] += speed * ts;
-            if (Input::IsKeyPressed(KeyCode::W))
+            if (Input::IsKeyPressed(Key::W))
                 transform[3][1] += speed * ts;
-            if (Input::IsKeyPressed(KeyCode::S))
+            if (Input::IsKeyPressed(Key::S))
                 transform[3][1] -= speed * ts;
         }
     };
@@ -207,6 +211,8 @@ void EditorLayer::OnImGuiRender() {
                  ImVec2{1, 0});
     ImGui::End();
     ImGui::PopStyleVar();
+
+    m_SceneHierarchyPanel.OnImGuiRender();
 
     ImGui::End();
 }

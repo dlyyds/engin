@@ -28,13 +28,11 @@ void Scene::OnUpdate(const Timestep ts) {
     {
         m_Registry.view<NativeScriptComponent>().each([&](auto entity, NativeScriptComponent &nsc) {
             if (!nsc.Instance) {
-                nsc.InstantiateFunction();
+                nsc.Instance = nsc.InstantiateScript();
                 nsc.Instance->m_Entity = {entity, this};
-                if (nsc.OnCreateFunction)
-                    nsc.OnCreateFunction();
+                nsc.Instance->OnCreate();
             }
-            if (nsc.OnUpdateFunction)
-                nsc.OnUpdateFunction(ts);
+            nsc.Instance->OnUpdate(ts);
         });
     }
 
@@ -60,7 +58,7 @@ void Scene::OnUpdate(const Timestep ts) {
 
     const auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
     for (const auto entity : group) {
-        const auto &[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+        const auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
         Renderer2D::DrawQuad(static_cast<glm::mat4>(transform), sprite.Color);
     }

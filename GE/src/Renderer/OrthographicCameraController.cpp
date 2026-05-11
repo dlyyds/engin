@@ -16,19 +16,19 @@ OrthographicCameraController::OrthographicCameraController(float aspectRatio, bo
 
 void OrthographicCameraController::OnUpdate(Timestep ts) {
     GE_PROFILE_FUNCTION();
-    if (Input::IsKeyPressed(GE_KEY_LEFT))
+    if (Input::IsKeyPressed(Key::Left))
         m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
-    else if (Input::IsKeyPressed(GE_KEY_RIGHT))
+    else if (Input::IsKeyPressed(Key::Right))
         m_CameraPosition.x += m_CameraTranslationSpeed * ts;
 
-    if (Input::IsKeyPressed(GE_KEY_UP))
+    if (Input::IsKeyPressed(Key::Up))
         m_CameraPosition.y += m_CameraTranslationSpeed * ts;
-    else if (Input::IsKeyPressed(GE_KEY_DOWN))
+    else if (Input::IsKeyPressed(Key::Down))
         m_CameraPosition.y -= m_CameraTranslationSpeed * ts;
     if (m_Rotation) {
-        if (Input::IsKeyPressed(GE_KEY_Q))
+        if (Input::IsKeyPressed(Key::Q))
             m_CameraRotation += m_CameraRotationSpeed * ts;
-        if (Input::IsKeyPressed(GE_KEY_E))
+        if (Input::IsKeyPressed(Key::E))
             m_CameraRotation -= m_CameraRotationSpeed * ts;
         m_Camera.SetRotation(m_CameraRotation);
     }
