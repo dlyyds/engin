@@ -20,15 +20,15 @@
 #include "Renderer/VertexArray.h"
 #include "Renderer/Framebuffer.h"
 
-
 //Scene
 #include "Scene/Scene.h"
 #include "Scene/Components.h"
 #include "Scene/Entity.h"
 
-#include "Platform/Windows/WindowsWindow.h"
-
-#include "ImGui/ImGuiLayer.h"
-
+//Debug
 #include "Debug/Instrumentor.h"
 #include "Debug/Assert.h"
+
+#include "Platform/Windows/WindowsWindow.h"
+#include "ImGui/ImGuiLayer.h"
+#include "Utils/PlatformUtils.h"

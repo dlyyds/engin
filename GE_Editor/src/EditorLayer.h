@@ -25,6 +25,14 @@ public:
 private:
     OrthographicCameraController m_CameraController;
 
+    bool OnKeyPressed(KeyPressedEvent &e);
+
+    void NewScene();
+
+    void OpenScene();
+
+    void SaveSceneAs();
+
     // Temp
     Ref<VertexArray> m_SquareVA;
     Ref<Shader> m_FlatColorShader;
