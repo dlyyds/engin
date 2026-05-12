@@ -24,6 +24,7 @@ add_subdirectory(GE/vendor/spdlog)
 add_subdirectory(GE/vendor/glfw)
 add_subdirectory(GE/vendor/glad)
 add_subdirectory(GE/vendor/imgui)
+add_subdirectory(GE/vendor/yaml-cpp)
 
 file(GLOB GE_SRC
         ${CMAKE_SOURCE_DIR}/GE/src/*.cpp
@@ -48,7 +49,13 @@ target_compile_definitions(${GE_NAME} PUBLIC
         GLFW_INCLUDE_NONE
         GE_DEBUG
 )
-target_link_libraries(${GE_NAME} PUBLIC spdlog::spdlog glfw glad imgui)
+target_link_libraries(${GE_NAME} PUBLIC
+        spdlog::spdlog
+        glfw
+        glad
+        imgui
+        yaml-cpp::yaml-cpp
+)
 
 
 if (WIN32)

@@ -30,7 +30,7 @@ Application::Application(const std::string &name) {
     GE_CORE_ASSERT(!s_Instance, "Application already exists!");
     s_Instance = this;
     //  WindowProps p("title", 1000, 700);
-    m_Window = Window::Create(WindowProps(name));
+    m_Window = Window::Create(WindowProps(name, 1600, 900));
     m_Window->SetEventCallback(GE_BIND_EVENT_FN(Application::OnEvent));
 
     Renderer::Init();

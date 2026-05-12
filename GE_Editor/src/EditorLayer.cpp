@@ -1,6 +1,7 @@
 #include "EditorLayer.h"
 
 #include "Scene/Entity.h"
+#include "Scene/SceneSerializer.h"
 
 #include <imgui.h>
 
@@ -20,13 +21,13 @@ void EditorLayer::OnAttach() {
     m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
 
     FramebufferSpecification fbSpec;
-    fbSpec.Width = 1280;
-    fbSpec.Height = 720;
+    fbSpec.Width = 1;
+    fbSpec.Height = 1;
     m_Framebuffer = Framebuffer::Create(fbSpec);
 
     m_ActiveScene = CreateRef<Scene>();
     m_SceneHierarchyPanel.SetContext(m_ActiveScene);
-
+#if 0
     m_SquareEntity = m_ActiveScene->CreateEntity("square");
     Entity square = m_ActiveScene->CreateEntity("square2");
 
@@ -46,22 +47,22 @@ void EditorLayer::OnAttach() {
         }
 
         void OnUpdate(Timestep ts) override {
-            auto &transform = GetComponent<TransformComponent>().Transform;
+            auto &translation = GetComponent<TransformComponent>().Translation;
             float speed = 5.0f;
 
             if (Input::IsKeyPressed(Key::A))
-                transform[3][0] -= speed * ts;
+                translation.x -= speed * ts;
             if (Input::IsKeyPressed(Key::D))
-                transform[3][0] += speed * ts;
+                translation.x += speed * ts;
             if (Input::IsKeyPressed(Key::W))
-                transform[3][1] += speed * ts;
+                translation.y += speed * ts;
             if (Input::IsKeyPressed(Key::S))
-                transform[3][1] -= speed * ts;
+                translation.y -= speed * ts;
         }
     };
 
     m_CameraEntity.AddComponent<NativeScriptComponent>().Bind<CameraController>();
-
+#endif
 }
 
 void EditorLayer::OnDetach() {
@@ -143,16 +144,29 @@ void EditorLayer::OnImGuiRender() {
 
     // DockSpace
     ImGuiIO &io = ImGui::GetIO();
+    ImGuiStyle &style = ImGui::GetStyle();
+    float minWinSizeX = style.WindowMinSize.x;
+    style.WindowMinSize.x = 370.0f;
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable) {
         ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
         ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
     }
+    style.WindowMinSize.x = minWinSizeX;
 
     if (ImGui::BeginMenuBar()) {
         if (ImGui::BeginMenu("File")) {
             // Disabling fullscreen would allow the window to be moved to the front of other windows,
             // which we can't undo at the moment without finer window depth/z control.
             //ImGui::MenuItem("Fullscreen", NULL, &opt_fullscreen_persistant);
+            if (ImGui::MenuItem("Serialize")) {
+                SceneSerializer serializer(m_ActiveScene);
+                serializer.Serialize("assets/scenes/Example.yaml");
+            }
+
+            if (ImGui::MenuItem("Deserialize")) {
+                SceneSerializer serializer(m_ActiveScene);
+                serializer.Deserialize("assets/scenes/Example.yaml");
+            }
 
             if (ImGui::MenuItem("Exit"))
                 Application::Get().Close();
@@ -174,23 +188,6 @@ void EditorLayer::OnImGuiRender() {
 
     ImGui::Text("focus viewport: %d", m_ViewportFocused);
     ImGui::Text("hover viewport: %d", m_ViewportHovered);
-
-    if (m_SquareEntity) {
-        ImGui::Separator();
-        const auto &tag = m_SquareEntity.GetComponent<TagComponent>().Tag;
-        ImGui::Text("%s", tag.c_str());
-
-        auto &squareColor = m_SquareEntity.GetComponent<SpriteRendererComponent>().Color;
-        ImGui::ColorEdit4("Square Color", glm::value_ptr(squareColor));
-        ImGui::Separator();
-    }
-    ImGui::DragFloat3("Camera Transform",
-                      glm::value_ptr(m_CameraEntity.GetComponent<TransformComponent>().Transform[3]));
-
-    auto &camera = m_CameraEntity.GetComponent<CameraComponent>().Camera;
-    float orthoSize = camera.GetOrthographicSize();
-    if (ImGui::DragFloat("Second Camera Ortho Size", &orthoSize))
-        camera.SetOrthographicSize(orthoSize);
 
     ImGui::End();
 

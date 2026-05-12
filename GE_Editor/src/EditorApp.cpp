@@ -12,8 +12,7 @@ public:
         PushLayer(new EditorLayer());
     }
 
-    ~GEEditor() {
-    }
+    ~GEEditor() override = default;
 };
 
 Application *CreateApplication() {

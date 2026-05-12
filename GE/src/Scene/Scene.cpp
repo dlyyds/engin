@@ -23,6 +23,11 @@ Entity Scene::CreateEntity(const std::string &name) {
     return entity;
 }
 
+void Scene::DestroyEntity(Entity entity) {
+    m_Registry.destroy(static_cast<entt::entity>(entity));
+}
+
+
 void Scene::OnUpdate(const Timestep ts) {
     //update Script
     {
@@ -37,30 +42,34 @@ void Scene::OnUpdate(const Timestep ts) {
     }
 
     const Camera *mainCamera = nullptr;
-    const glm::mat4 *cameraTransform = nullptr;
+    glm::mat4 cameraTransform;
 
-    const auto cameraGroup = m_Registry.view<TransformComponent, CameraComponent>();
-    for (auto [entity, transform, camera] : cameraGroup.each()) {
-
+    const auto cameraView = m_Registry.view<TransformComponent, CameraComponent>();
+    for (auto [entity, transform, camera] : cameraView.each()) {
         if (camera.Primary) {
             mainCamera = &camera.Camera;
-            cameraTransform = &transform.Transform;
+            cameraTransform = transform.GetTransform();
             break;
         }
     }
 
-    if (!mainCamera || !cameraTransform) {
-        GE_WARN("mianCamera not find!");
+    static bool warnOnce = false;
+    if (!mainCamera) {
+        if (!warnOnce) {
+            GE_WARN("mianCamera not find!");
+            warnOnce = true;
+        }
         return;
     }
+    warnOnce = false;
 
-    Renderer2D::BeginScene(*mainCamera, *cameraTransform);
+    Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
     const auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
     for (const auto entity : group) {
         const auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-        Renderer2D::DrawQuad(static_cast<glm::mat4>(transform), sprite.Color);
+        Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
     }
 
     Renderer2D::EndScene();
@@ -78,6 +87,33 @@ void Scene::OnViewportResize(const uint32_t width, const uint32_t height) {
             cameraComponent.Camera.SetViewportSize(width, height);
         }
     }
+}
+
+
+template <typename T>
+void Scene::OnComponentAdded(Entity entity, T &component) {
+    static_assert(false);
+}
+
+template <>
+void Scene::OnComponentAdded<TransformComponent>(Entity entity, TransformComponent &component) {
+}
+
+template <>
+void Scene::OnComponentAdded<CameraComponent>(Entity entity, CameraComponent &component) {
+    component.Camera.SetViewportSize(m_ViewportWidth, m_ViewportHeight);
+}
+
+template <>
+void Scene::OnComponentAdded<SpriteRendererComponent>(Entity entity, SpriteRendererComponent &component) {
+}
+
+template <>
+void Scene::OnComponentAdded<TagComponent>(Entity entity, TagComponent &component) {
+}
+
+template <>
+void Scene::OnComponentAdded<NativeScriptComponent>(Entity entity, NativeScriptComponent &component) {
 }
 
 } //

@@ -5,6 +5,8 @@
 #include "GE/Scene/Scene.h"
 #include "GE/Scene/Entity.h"
 
+#include "GE/Debug/Assert.h"
+
 namespace GE {
 
 class SceneHierarchyPanel {

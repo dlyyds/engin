@@ -13,21 +13,23 @@ class ImGuiLayer : public Layer {
 public:
     ImGuiLayer();
 
-    ~ImGuiLayer();
+    ~ImGuiLayer() override;
 
-    virtual void OnAttach() override;
+    void OnAttach() override;
 
-    virtual void OnDetach() override;
+    void OnDetach() override;
 
-    virtual void OnImGuiRender() override;
+    void OnImGuiRender() override;
 
-    virtual void OnEvent(Event &e) override;
+    void OnEvent(Event &e) override;
 
     static void Begin();
 
     static void End();
 
     void BlockEvents(const bool block) { m_BlockEvents = block; }
+
+    static void SetDarkThemeColors();
 
 private:
     float m_Time = 0.0f;
