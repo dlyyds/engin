@@ -4,8 +4,10 @@
 #include "Scene/SceneSerializer.h"
 
 #include <imgui.h>
+#include "ImGuizmo.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 namespace GE {
@@ -204,6 +206,53 @@ void EditorLayer::OnImGuiRender() {
     const uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
     ImGui::Image((void *)static_cast<uint64_t>(textureID), viewportPanelSize, ImVec2{0, 1},
                  ImVec2{1, 0});
+
+    Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
+    if (selectedEntity && m_GizmoType != -1) {
+        ImGuizmo::SetOrthographic(false);
+        ImGuizmo::SetDrawlist();
+
+        float windowWidth = (float)ImGui::GetWindowWidth();
+        float windowHeight = (float)ImGui::GetWindowHeight();
+        ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
+
+        // Camera
+        auto cameraEntity = m_ActiveScene->GetPrimaryCameraEntity();
+        const auto &camera = cameraEntity.GetComponent<CameraComponent>().Camera;
+        const glm::mat4 &cameraProjection = camera.GetProjection();
+        glm::mat4 cameraView = glm::inverse(cameraEntity.GetComponent<TransformComponent>().GetTransform());
+
+        // Entity transform
+        auto &tc = selectedEntity.GetComponent<TransformComponent>();
+        glm::mat4 transform = tc.GetTransform();
+
+        // Snapping
+        bool snap = Input::IsKeyPressed(Key::LeftControl);
+        float snapValue = 0.5f; // Snap to 0.5m for translation/scale
+        // Snap to 45 degrees for rotation
+        if (m_GizmoType == ImGuizmo::OPERATION::ROTATE)
+            snapValue = 45.0f;
+
+        float snapValues[3] = {snapValue, snapValue, snapValue};
+
+        ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
+                             static_cast<ImGuizmo::OPERATION>(m_GizmoType), ImGuizmo::LOCAL, glm::value_ptr(transform), nullptr,
+                             snap ? snapValues : nullptr);
+
+        if (ImGuizmo::IsUsing()) {
+            glm::vec3 scale;
+            glm::quat rot_quat;
+            glm::vec3 translation;
+            glm::vec3 skew;
+            glm::vec4 perspective;
+
+            glm::decompose(transform, scale, rot_quat, translation, skew, perspective);
+
+            tc.Translation = translation;
+            tc.Scale = scale;
+            tc.Rotation = glm::eulerAngles(rot_quat);
+        }
+    }
     ImGui::End();
     ImGui::PopStyleVar();
 
@@ -243,9 +292,16 @@ bool EditorLayer::OnKeyPressed(KeyPressedEvent &e) {
     case Key::S: {
         if (control && shift)
             SaveSceneAs();
-
         break;
     }
+    case Key::Q: m_GizmoType = -1;
+        break;
+    case Key::W: m_GizmoType = ImGuizmo::OPERATION::TRANSLATE;
+        break;
+    case Key::E: m_GizmoType = ImGuizmo::OPERATION::ROTATE;
+        break;
+    case Key::R: m_GizmoType = ImGuizmo::OPERATION::SCALE;
+        break;
     default: break;
     }
     return true;
@@ -258,22 +314,23 @@ void EditorLayer::NewScene() {
 }
 
 void EditorLayer::OpenScene() {
-    if (std::string filepath = FileDialogs::OpenFile("GE Scene (*.GE)\0*.GE\0"); !filepath.empty()) {
+    std::optional<std::string> filepath = FileDialogs::OpenFile("GE Scene (*.GE)\0*.GE\0");
+    if (filepath) {
         m_ActiveScene = CreateRef<Scene>();
         m_ActiveScene->OnViewportResize(static_cast<uint32_t>(m_ViewportSize.x), static_cast<uint32_t>(m_ViewportSize.y));
         m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 
         SceneSerializer serializer(m_ActiveScene);
-        if (!serializer.Deserialize(filepath)) {
-            GE_CORE_WARN("Failed to deserialize GE Scene : {0}", filepath);
+        if (!serializer.Deserialize(filepath.value())) {
+            GE_CORE_WARN("Failed to deserialize GE Scene : {0}", filepath.value());
         }
     }
 }
 
 void EditorLayer::SaveSceneAs() {
-    if (const std::string filepath = FileDialogs::SaveFile("GE Scene (*.GE)\0*.GE\0"); !filepath.empty()) {
+    if (const std::optional<std::string> filepath = FileDialogs::SaveFile("GE Scene (*.GE)\0*.GE\0")) {
         SceneSerializer serializer(m_ActiveScene);
-        serializer.Serialize(filepath);
+        serializer.Serialize(filepath.value());
     }
 }
 

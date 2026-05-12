@@ -25,6 +25,8 @@ add_subdirectory(GE/vendor/glfw)
 add_subdirectory(GE/vendor/glad)
 add_subdirectory(GE/vendor/imgui)
 add_subdirectory(GE/vendor/yaml-cpp)
+add_subdirectory(GE/vendor/ImGuizmo)
+
 
 file(GLOB GE_SRC
         ${CMAKE_SOURCE_DIR}/GE/src/*.cpp
@@ -55,6 +57,7 @@ target_link_libraries(${GE_NAME} PUBLIC
         glad
         imgui
         yaml-cpp::yaml-cpp
+        imguizmo
 )
 
 

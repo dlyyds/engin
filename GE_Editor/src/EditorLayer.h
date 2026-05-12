@@ -4,6 +4,7 @@
 
 #include "Panels/SceneHierarchyPanel.h"
 
+
 namespace GE {
 
 class EditorLayer : public Layer {
@@ -53,6 +54,8 @@ private:
     glm::vec4 m_SquareColor = {0.2f, 0.3f, 0.8f, 1.0f};
 
     SceneHierarchyPanel m_SceneHierarchyPanel;
+
+    int m_GizmoType = -1;
 };
 
 }

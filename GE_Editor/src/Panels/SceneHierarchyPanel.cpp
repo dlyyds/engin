@@ -34,7 +34,6 @@ void SceneHierarchyPanel::OnImGuiRender() {
     if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_NoOpenOverItems | ImGuiPopupFlags_MouseButtonRight)) {
         if (ImGui::MenuItem("Create Empty Entity"))
             m_Context->CreateEntity("Empty Entity");
-
         ImGui::EndPopup();
     }
 

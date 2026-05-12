@@ -6,7 +6,8 @@
 #include "SceneCamera.h"
 #include "ScriptableEntity.h"
 
-#include "glm/gtc/quaternion.hpp"
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
 
 namespace GE {
 
@@ -36,12 +37,8 @@ struct TransformComponent {
     }
 
     [[nodiscard]] glm::mat4 GetTransform() const {
-        // const glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), Rotation.x, {1, 0, 0})
-        //                            * glm::rotate(glm::mat4(1.0f), Rotation.y, {0, 1, 0})
-        //                            * glm::rotate(glm::mat4(1.0f), Rotation.z, {0, 0, 1});
-        //  glm::orientate4(Rotation);
-        glm::quat rotationQuat = glm::quat(Rotation);
-        glm::mat4 rotation = glm::mat4_cast(rotationQuat);
+
+        const glm::mat4 rotation = glm::toMat4(glm::quat(Rotation));
 
         return glm::translate(glm::mat4(1.0f), Translation)
                * rotation

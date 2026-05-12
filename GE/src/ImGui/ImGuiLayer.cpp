@@ -10,6 +10,7 @@
 #include "backends/imgui_impl_opengl3.h"
 
 #include "imgui.h"
+#include "ImGuizmo.h"
 
 #include "Core/Log.h"
 #define IMGUI_ENABLE_DOCKING
@@ -78,6 +79,7 @@ void ImGuiLayer::Begin() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
 }
 
 void ImGuiLayer::End() {
