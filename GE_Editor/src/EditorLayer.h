@@ -3,7 +3,7 @@
 #include "GE.h"
 
 #include "Panels/SceneHierarchyPanel.h"
-
+#include "Renderer/EditorCamrea.h"
 
 namespace GE {
 
@@ -11,15 +11,15 @@ class EditorLayer : public Layer {
 public:
     EditorLayer();
 
-    virtual ~EditorLayer() = default;
+    ~EditorLayer() override = default;
 
-    virtual void OnAttach() override;
+    void OnAttach() override;
 
-    virtual void OnDetach() override;
+    void OnDetach() override;
 
-    virtual void OnUpdate(Timestep &ts) override;
+    void OnUpdate(Timestep &ts) override;
 
-    virtual void OnImGuiRender() override;
+    void OnImGuiRender() override;
 
     void OnEvent(Event &e) override;
 
@@ -43,6 +43,7 @@ private:
     Ref<Scene> m_ActiveScene;
     Entity m_SquareEntity{};
     Entity m_CameraEntity{};
+    EditorCamera m_EditorCamera;
 
     glm::vec2 m_ViewportSize = {0.0f, 0.0f};
     bool m_ViewportResize = false;

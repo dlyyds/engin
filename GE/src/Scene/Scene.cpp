@@ -28,7 +28,7 @@ void Scene::DestroyEntity(Entity entity) {
 }
 
 
-void Scene::OnUpdate(const Timestep ts) {
+void Scene::OnUpdateRuntime(const Timestep ts) {
     //update Script
     {
         m_Registry.view<NativeScriptComponent>().each([&](auto entity, NativeScriptComponent &nsc) {
@@ -74,6 +74,19 @@ void Scene::OnUpdate(const Timestep ts) {
 
     Renderer2D::EndScene();
 
+}
+
+void Scene::OnUpdateEditor(Timestep ts, EditorCamera &camera) {
+    Renderer2D::BeginScene(camera);
+
+    auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
+    for (auto entity : group) {
+        auto [transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+
+        Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+    }
+
+    Renderer2D::EndScene();
 }
 
 

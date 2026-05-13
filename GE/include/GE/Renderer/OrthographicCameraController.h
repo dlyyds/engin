@@ -3,8 +3,8 @@
 #include "Core/Timestep.h"
 #include "Renderer/OrthographicCamera.h"
 
-#include "Event/ApplicationEvent.h"
-#include "Event/MouseEvent.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/MouseEvent.h"
 
 
 namespace GE {

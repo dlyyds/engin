@@ -2,7 +2,7 @@
 
 
 #include "Base.h"
-#include "Event/Event.h"
+#include "Events/Event.h"
 
 namespace GE {
 

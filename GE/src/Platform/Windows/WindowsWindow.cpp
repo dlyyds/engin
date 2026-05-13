@@ -1,8 +1,8 @@
 #include "pch.h"
 
-#include "Event/ApplicationEvent.h"
-#include "Event/KeyEvent.h"
-#include "Event/MouseEvent.h"
+#include "Events/ApplicationEvent.h"
+#include "Events/KeyEvent.h"
+#include "Events/MouseEvent.h"
 
 #include "Core/Log.h"
 #include "Platform/Windows/WindowsWindow.h"

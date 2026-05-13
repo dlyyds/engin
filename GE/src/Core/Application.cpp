@@ -9,7 +9,7 @@
 #include "Core/MouseCodes.h"
 #include "Core/Timestep.h"
 
-#include <Event/ApplicationEvent.h>
+#include <Events/ApplicationEvent.h>
 
 #include <GLFW/glfw3.h>
 #include <functional>

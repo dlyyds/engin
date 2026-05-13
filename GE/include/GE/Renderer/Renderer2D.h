@@ -3,6 +3,7 @@
 #include "OrthographicCamera.h"
 #include "Texture.h"
 #include "Renderer/Camera.h"
+#include "Renderer/EditorCamrea.h"
 
 namespace GE {
 
@@ -13,6 +14,8 @@ public:
     static void Shutdown();
 
     static void BeginScene(const OrthographicCamera &camera);
+
+    static void BeginScene(const EditorCamera &camera);
 
     static void BeginScene(const Camera &camera, const glm::mat4 &transform);
 
@@ -65,6 +68,8 @@ public:
     static Statistics GetStats();
 
 private:
+    static void StartBatch();
+
     static void FlushAndReset();
 };
 

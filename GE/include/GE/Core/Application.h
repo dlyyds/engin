@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Base.h"
-#include "Event/ApplicationEvent.h"
+#include "Events/ApplicationEvent.h"
 #include "GEWindow.h"
 #include "ImGui/ImGuiLayer.h"
 #include "Layer.h"
