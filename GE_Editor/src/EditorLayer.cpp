@@ -23,6 +23,7 @@ void EditorLayer::OnAttach() {
     m_CheckerboardTexture = Texture2D::Create("assets/textures/Checkerboard.png");
 
     FramebufferSpecification fbSpec;
+    fbSpec.Attachments = {FramebufferTextureFormat::RGBA8, FramebufferTextureFormat::Depth};
     fbSpec.Width = 1;
     fbSpec.Height = 1;
     m_Framebuffer = Framebuffer::Create(fbSpec);
@@ -208,7 +209,7 @@ void EditorLayer::OnImGuiRender() {
         m_ViewportResize = true;
         m_ViewportSize = {viewportPanelSize.x, viewportPanelSize.y};
     }
-    const uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+    const uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID(0);
     ImGui::Image((void *)static_cast<uint64_t>(textureID), viewportPanelSize, ImVec2{0, 1},
                  ImVec2{1, 0});
 
