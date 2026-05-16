@@ -28,6 +28,8 @@ private:
 
     bool OnKeyPressed(KeyPressedEvent &e);
 
+    bool OnMouseButtonPressed(MouseButtonPressedEvent &e);
+
     void NewScene();
 
     void OpenScene();
@@ -41,12 +43,13 @@ private:
 
 
     Ref<Scene> m_ActiveScene;
-    Entity m_SquareEntity{};
-    Entity m_CameraEntity{};
+
     EditorCamera m_EditorCamera;
 
-    glm::vec2 m_ViewportSize = {0.0f, 0.0f};
-    bool m_ViewportResize = false;
+    Entity m_HoveredEntity;
+
+    glm::vec2 m_ViewportSize = {1.0f, 1.0f};
+    glm::vec2 m_ViewportBounds[2];
 
     bool m_ViewportFocused = false, m_ViewportHovered = false;
 

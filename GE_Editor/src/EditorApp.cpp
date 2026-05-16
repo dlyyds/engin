@@ -9,7 +9,8 @@ class GEEditor : public Application {
 public:
     GEEditor()
         : Application("Hazel Editor") {
-        PushLayer(new EditorLayer());
+        auto *editorLayer = new EditorLayer();
+        PushLayer(editorLayer);
     }
 
     ~GEEditor() override = default;

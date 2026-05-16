@@ -17,6 +17,8 @@ public:
 
     void SetContext(const Ref<Scene> &scene);
 
+    void SetSelectedEntity(Entity entity);
+
     void OnImGuiRender();
 
     [[nodiscard]] Entity GetSelectedEntity() const { return m_SelectionContext; }
